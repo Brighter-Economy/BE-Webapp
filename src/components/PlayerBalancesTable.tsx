@@ -1,4 +1,5 @@
 import mockPlayerData from "../assets/MOCK_PLAYER_DATA.json";
+import BasicTable from "./BasicTable";
 
 interface DataRowParameters {
   name: string;
@@ -42,24 +43,11 @@ const DataRows = () =>
     );
   });
 
-function PlayerBalancesTable() {
-  return (
-    <>
-      <table className="table table-dark table-hover rounded-2 overflow-hidden table-borderless">
-        <thead>
-          <tr>
-            <th scope="col">Name</th>
-            <th scope="col">UUID</th>
-            <th scope="col">Balance</th>
-            <th scope="col">Locked</th>
-          </tr>
-        </thead>
-        <tbody className="form-switch">
-          <DataRows />
-        </tbody>
-      </table>
-    </>
-  );
-}
+const PlayerBalancesTable = () => (
+  <BasicTable
+    headers={["Name", "UUID", "Balance", "Locked"]}
+    rows={DataRows()}
+  />
+);
 
 export default PlayerBalancesTable;
