@@ -27,7 +27,7 @@ function Navbar() {
   return (
     <>
       <nav
-        className="navbar navbar-dark navbar-expand-sm rounded-bottom"
+        className="navbar navbar-dark navbar-expand-sm rounded-bottom shadow"
         style={{ backgroundColor: "#0d47a1" }}
       >
         <a href="#" className="navbar-brand m-0 h1">

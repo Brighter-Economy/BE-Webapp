@@ -6,7 +6,7 @@ interface BasicTableParams {
 }
 
 const BasicTable: React.FC<BasicTableParams> = ({ headers, rows }) => (
-  <table className="table table-dark table-hover rounded-2 overflow-hidden table-borderless">
+  <table className="table table-dark table-hover rounded-2 overflow-hidden table-borderless shadow">
     <thead>
       <tr>
         {headers.map((header) => (
