@@ -15,12 +15,18 @@ const DataRow: React.FC<DataRowParameters> = ({
   locked,
 }) => (
   <tr>
-    <th scope="row">{name}</th>
+    <td>
+      <img
+        className="rounded m-0 p-0 me-2"
+        src={"https://mc-heads.net/avatar/" + uuid + "/24"}
+      />
+      {name}
+    </td>
     <td>{uuid}</td>
     <td>{balance}</td>
     <td>
       <input
-        className="form-check-input mx-auto"
+        className="form-check-input mx-auto ms-2"
         type="checkbox"
         role="switch"
         value=""

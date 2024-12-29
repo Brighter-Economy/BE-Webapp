@@ -54,7 +54,7 @@ function Navbar() {
           <div className="ms-auto">
             <ul className="navbar-nav">
               <NavLink path="/items" content="Items" />
-              <NavLink path="/players" content="Player Balances" />
+              <NavLink path="/players" content="Players" />
               <NavLink path="/servershops" content="Server Shops" />
               <NavLink path="/auctions" content="Auctions" />
               <NavLink

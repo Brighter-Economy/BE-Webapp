@@ -3,7 +3,6 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 interface DataRowParameters {
-  uuid: string;
   datetime: string;
   to: string;
   from: string;
@@ -11,20 +10,13 @@ interface DataRowParameters {
 }
 
 const DataRow: React.FC<DataRowParameters> = ({
-  uuid,
   datetime,
   to,
   from,
   amount,
 }) => (
   <tr>
-    <th scope="row">
-      <img
-        className="rounded m-0 p-0"
-        src={"https://mc-heads.net/avatar/" + uuid + "/24"}
-      />
-    </th>
-    <th>{datetime}</th>
+    <td>{datetime}</td>
     <td>{to}</td>
     <td>{from}</td>
     <td>{amount}</td>
@@ -41,6 +33,7 @@ function PlayerAccountModal() {
   const username = "CasualCynic";
   const balance = 919191;
   const locked = true;
+  const latestLogin = "1-01-1960";
 
   return (
     <>
@@ -82,14 +75,25 @@ function PlayerAccountModal() {
                   placeholder={uuid}
                 />
               </div>
-              <div className="input-group mb-2">
-                <span className="input-group-text">Username</span>
-                <input
-                  type="input-group-text"
-                  className="form-control"
-                  disabled={true}
-                  placeholder={username}
-                />
+              <div className="d-flex mb-2">
+                <div className="input-group me-2">
+                  <span className="input-group-text">Username</span>
+                  <input
+                    type="input-group-text"
+                    className="form-control"
+                    disabled={true}
+                    placeholder={username}
+                  />
+                </div>
+                <div className="input-group me-2">
+                  <span className="input-group-text">Last Login</span>
+                  <input
+                    type="input-group-text"
+                    className="form-control"
+                    disabled={true}
+                    placeholder={latestLogin}
+                  />
+                </div>
               </div>
               <div className="d-flex mb-2">
                 <div className="input-group me-2">
@@ -129,7 +133,6 @@ function PlayerAccountModal() {
               <table className="table table-dark table-hover rounded-2 overflow-hidden">
                 <thead>
                   <tr>
-                    <th scope="col"></th>
                     <th scope="col">Timestamp</th>
                     <th scope="col">To</th>
                     <th scope="col">From</th>
@@ -138,35 +141,30 @@ function PlayerAccountModal() {
                 </thead>
                 <tbody>
                   <DataRow
-                    uuid="09cd3bc1-e1d5-4e08-8cb5-c7189ce7c082"
                     datetime="1735453443"
                     to="bright_spark"
                     from="CasualCynic"
                     amount="216"
                   />
                   <DataRow
-                    uuid="09cd3bc1-e1d5-4e08-8cb5-c7189ce7c082"
                     datetime="1735457043"
                     to="bright_spark"
                     from="CasualCynic"
                     amount="572"
                   />
                   <DataRow
-                    uuid="4adad317-d08b-412d-a75b-c2834386b088"
                     datetime="1735496643"
                     to="CasualCynic"
                     from="BrightSpark"
                     amount="1100"
                   />
                   <DataRow
-                    uuid="09cd3bc1-e1d5-4e08-8cb5-c7189ce7c082"
                     datetime="1736058243"
                     to="bright_spark"
                     from="CasualCynic"
                     amount="612"
                   />
                   <DataRow
-                    uuid="4adad317-d08b-412d-a75b-c2834386b088"
                     datetime="1738131843"
                     to="CasualCynic"
                     from="bright_spark"
