@@ -1,12 +1,29 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Link, useLocation } from "react-router-dom";
 
-function Navbar() {
-  const location = useLocation();
-  const navClass = (path: string) => {
-    return path === location.pathname ? "nav-link h2 active" : "nav-link h2";
-  };
+interface NavLinkParams {
+  path: string;
+  content: any;
+}
 
+const NavLink: React.FC<NavLinkParams> = ({ path, content }) => {
+  const location = useLocation();
+
+  var linkClasses = "nav-link h2";
+  if (path === location.pathname) {
+    linkClasses += " active";
+  }
+
+  return (
+    <li className="nav-item">
+      <Link className={linkClasses} to={path}>
+        {content}
+      </Link>
+    </li>
+  );
+};
+
+function Navbar() {
   return (
     <>
       <nav
@@ -36,40 +53,18 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navebarNav">
           <div className="ms-auto">
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className={navClass("/items")} to="/items">
-                  Items
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className={navClass("/players")} to="/players">
-                  Player Balances
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className={navClass("/servershops")} to="/servershops">
-                  Server Shops
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className={navClass("/auctions")} to="/auctions">
-                  Auctions
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className={navClass("/settings")} to="/settings">
-                  <i className="bi bi-gear" />
-                </Link>
-              </li>
-
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  to="https://github.com/Brighter-Economy/BrighterEconomy"
-                >
-                  <i className="bi bi-github" />
-                </Link>
-              </li>
+              <NavLink path="/items" content="Items" />
+              <NavLink path="/players" content="Player Balances" />
+              <NavLink path="/servershops" content="Server Shops" />
+              <NavLink path="/auctions" content="Auctions" />
+              <NavLink
+                path="/settings"
+                content={<i className="bi bi-gear" />}
+              />
+              <NavLink
+                path="https://github.com/Brighter-Economy/BrighterEconomy"
+                content={<i className="bi bi-github" />}
+              />
             </ul>
           </div>
         </div>
