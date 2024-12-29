@@ -1,4 +1,4 @@
-import mockPlayerData from "../assets/MOCK_PLAYER_DATA.json";
+import { useEffect, useState } from "react";
 import BasicTable from "./BasicTable";
 
 interface DataRowParameters {
@@ -31,23 +31,43 @@ const DataRow: React.FC<DataRowParameters> = ({
   </tr>
 );
 
-const DataRows = () =>
-  mockPlayerData.map((element) => {
-    return (
+interface PlayerAccount {
+  uuid: string;
+  username: string;
+  locked: boolean;
+  money: number;
+}
+
+const PlayerBalancesTable = () => {
+  const [playerAccounts, setPlayerAccounts] = useState<PlayerAccount[]>([]);
+
+  const updatePlayerAccounts = async () => {
+    const accountsJson = await fetch("/api/accounts").then((response) =>
+      response.json()
+    );
+    setPlayerAccounts(accountsJson);
+  };
+
+  useEffect(() => {
+    updatePlayerAccounts();
+  }, []);
+
+  const DataRows = () =>
+    playerAccounts.map((element) => (
       <DataRow
         name={element.username}
         uuid={element.uuid}
         balance={element.money.toString()}
         locked={element.locked}
       />
-    );
-  });
+    ));
 
-const PlayerBalancesTable = () => (
-  <BasicTable
-    headers={["Name", "UUID", "Balance", "Locked"]}
-    rows={DataRows()}
-  />
-);
+  return (
+    <BasicTable
+      headers={["Name", "UUID", "Balance", "Locked"]}
+      rows={DataRows()}
+    />
+  );
+};
 
 export default PlayerBalancesTable;

@@ -12,47 +12,56 @@ import PlayerBalances from "./pages/PlayerBalances.tsx";
 import ServerShops from "./pages/ServerShops.tsx";
 import Settings from "./pages/Settings.tsx";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    errorElement: (
-      <img
-        src="https://http.cat/404"
-        className="rounded mx-auto d-block mt-5"
-      />
-    ),
-    children: [
-      {
-        path: "/",
-        element: <TestPage />,
-      },
-      {
-        path: "/auctions",
-        element: <Auctions />,
-      },
-      {
-        path: "/items",
-        element: <Items />,
-      },
-      {
-        path: "/players",
-        element: <PlayerBalances />,
-      },
-      {
-        path: "/servershops",
-        element: <ServerShops />,
-      },
-      {
-        path: "/settings",
-        element: <Settings />,
-      },
-    ],
-  },
-]);
+async function enableMocking() {
+  if (process.env.NODE_ENV === "development") {
+    const { worker } = await import("./mocks/server.ts");
+    return worker.start();
+  }
+}
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
-);
+enableMocking().then(() => {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <App />,
+      errorElement: (
+        <img
+          src="https://http.cat/404"
+          className="rounded mx-auto d-block mt-5"
+        />
+      ),
+      children: [
+        {
+          path: "/",
+          element: <TestPage />,
+        },
+        {
+          path: "/auctions",
+          element: <Auctions />,
+        },
+        {
+          path: "/items",
+          element: <Items />,
+        },
+        {
+          path: "/players",
+          element: <PlayerBalances />,
+        },
+        {
+          path: "/servershops",
+          element: <ServerShops />,
+        },
+        {
+          path: "/settings",
+          element: <Settings />,
+        },
+      ],
+    },
+  ]);
+
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+  );
+});
