@@ -69,7 +69,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
               />
             </div>
             <div className="d-flex mb-2">
-              <div className="input-group me-2">
+              <div className="input-group">
                 <span className="input-group-text">Username</span>
                 <input
                   type="input-group-text"
@@ -78,15 +78,6 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                   placeholder={username}
                 />
               </div>
-              {/* <div className="input-group me-2">
-                <span className="input-group-text">Last Login</span>
-                <input
-                  type="input-group-text"
-                  className="form-control"
-                  disabled={true}
-                  placeholder={lastLogin}
-                />
-              </div> */}
             </div>
             <div className="d-flex mb-2">
               <div className="input-group me-2">
@@ -148,7 +139,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                 <DataRow
                   datetime="1735496643"
                   to="CasualCynic"
-                  from="BrightSpark"
+                  from="bright_spark"
                   amount="1100"
                 />
                 <DataRow
