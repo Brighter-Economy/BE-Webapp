@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //pages
 import TestPage from "./pages/TestPage.tsx";
+import Test from "./pages/Test.tsx";
 import Auctions from "./pages/Auctions.tsx";
 import Items from "./pages/Items.tsx";
 import PlayerBalances from "./pages/PlayerBalances.tsx";
@@ -55,6 +56,10 @@ enableMocking().then(() => {
         {
           path: "/kitty",
           element: <Kitty />,
+        },
+        {
+          path: "/:testId",
+          element: <Test />,
         },
       ],
     },
