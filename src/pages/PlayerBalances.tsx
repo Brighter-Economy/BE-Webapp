@@ -1,4 +1,3 @@
-import PlayerAccountModal from "../components/PlayerAccountModal";
 import PlayerBalancesTable from "../components/PlayerBalancesTable";
 
 function PlayerBalances() {
@@ -28,7 +27,6 @@ function PlayerBalances() {
         </button>
       </div>
       <div className="p-3">
-        <PlayerAccountModal />
         <PlayerBalancesTable />
       </div>
     </>

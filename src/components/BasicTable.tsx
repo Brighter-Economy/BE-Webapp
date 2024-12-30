@@ -10,7 +10,9 @@ const BasicTable: React.FC<BasicTableParams> = ({ headers, rows }) => (
     <thead>
       <tr>
         {headers.map((header) => (
-          <th scope="col">{header}</th>
+          <th key={header} scope="col">
+            {header}
+          </th>
         ))}
       </tr>
     </thead>

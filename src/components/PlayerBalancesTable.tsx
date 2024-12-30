@@ -1,41 +1,6 @@
 import { useEffect, useState } from "react";
 import BasicTable from "./BasicTable";
-
-interface DataRowParameters {
-  name: string;
-  uuid: string;
-  balance: string;
-  locked: boolean;
-}
-
-const DataRow: React.FC<DataRowParameters> = ({
-  name,
-  uuid,
-  balance,
-  locked,
-}) => (
-  <tr>
-    <td>
-      <img
-        className="rounded m-0 p-0 me-2"
-        src={"https://mc-heads.net/avatar/" + uuid + "/24"}
-      />
-      {name}
-    </td>
-    <td>{uuid}</td>
-    <td>{balance}</td>
-    <td>
-      <input
-        className="form-check-input mx-auto ms-2"
-        type="checkbox"
-        role="switch"
-        value=""
-        disabled
-        checked={locked}
-      />
-    </td>
-  </tr>
-);
+import PlayerAccountModal from "./PlayerAccountModal";
 
 interface PlayerAccount {
   uuid: string;
@@ -44,8 +9,47 @@ interface PlayerAccount {
   money: number;
 }
 
+const emptyPlayerAccount = {
+  uuid: "",
+  username: "",
+  locked: false,
+  money: 0,
+};
+
+interface DataRowParameters {
+  playerAccount: PlayerAccount;
+  onClick: () => void;
+}
+
+const DataRow: React.FC<DataRowParameters> = ({ playerAccount, onClick }) => (
+  <tr onClick={onClick}>
+    <td>
+      <img
+        className="rounded m-0 p-0 me-2"
+        src={"https://mc-heads.net/avatar/" + playerAccount.uuid + "/24"}
+      />
+      {playerAccount.username}
+    </td>
+    <td>{playerAccount.uuid}</td>
+    <td>{playerAccount.money.toString()}</td>
+    <td>
+      <input
+        className="form-check-input mx-auto ms-2"
+        type="checkbox"
+        role="switch"
+        value=""
+        disabled
+        checked={playerAccount.locked}
+      />
+    </td>
+  </tr>
+);
+
 const PlayerBalancesTable = () => {
   const [playerAccounts, setPlayerAccounts] = useState<PlayerAccount[]>([]);
+  const [selectedPlayerAccount, setSelectedPlayerAccount] =
+    useState<PlayerAccount>(emptyPlayerAccount);
+  const [shouldShowModal, setShouldShowModal] = useState<boolean>(false);
 
   const updatePlayerAccounts = async () => {
     const accountsJson = await fetch("/api/accounts").then((response) =>
@@ -61,18 +65,27 @@ const PlayerBalancesTable = () => {
   const DataRows = () =>
     playerAccounts.map((element) => (
       <DataRow
-        name={element.username}
-        uuid={element.uuid}
-        balance={element.money.toString()}
-        locked={element.locked}
+        key={element.uuid}
+        playerAccount={element}
+        onClick={() => {
+          setSelectedPlayerAccount(element);
+          setShouldShowModal(true);
+        }}
       />
     ));
 
   return (
-    <BasicTable
-      headers={["Name", "UUID", "Balance", "Locked"]}
-      rows={DataRows()}
-    />
+    <>
+      <PlayerAccountModal
+        shouldShow={() => shouldShowModal}
+        onClose={() => setShouldShowModal(false)}
+        playerAccount={() => selectedPlayerAccount}
+      />
+      <BasicTable
+        headers={["Name", "UUID", "Balance", "Locked"]}
+        rows={DataRows()}
+      />
+    </>
   );
 };
 

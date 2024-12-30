@@ -15,7 +15,7 @@ import Settings from "./pages/Settings.tsx";
 async function enableMocking() {
   if (process.env.NODE_ENV === "development") {
     const { worker } = await import("./mocks/server.ts");
-    return worker.start();
+    return worker.start({ onUnhandledRequest: "bypass" });
   }
 }
 
