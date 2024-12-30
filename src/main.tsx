@@ -11,6 +11,8 @@ import Items from "./pages/Items.tsx";
 import PlayerBalances from "./pages/PlayerBalances.tsx";
 import ServerShops from "./pages/ServerShops.tsx";
 import Settings from "./pages/Settings.tsx";
+import ErrorPage from "./pages/ErrorPage.tsx";
+import Kitty from "./pages/Kitty.tsx";
 
 async function enableMocking() {
   if (process.env.NODE_ENV === "development") {
@@ -24,12 +26,7 @@ enableMocking().then(() => {
     {
       path: "/",
       element: <App />,
-      errorElement: (
-        <img
-          src="https://http.cat/404"
-          className="rounded mx-auto d-block mt-5"
-        />
-      ),
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -54,6 +51,10 @@ enableMocking().then(() => {
         {
           path: "/settings",
           element: <Settings />,
+        },
+        {
+          path: "/kitty",
+          element: <Kitty />,
         },
       ],
     },

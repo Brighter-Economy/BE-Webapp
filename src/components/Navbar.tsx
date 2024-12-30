@@ -1,5 +1,6 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 interface NavLinkParams {
   path: string;
@@ -24,13 +25,25 @@ const NavLink: React.FC<NavLinkParams> = ({ path, content }) => {
 };
 
 function Navbar() {
+  const [logoClickCount, setLogoClickCount] = useState(0);
+  let navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    if (logoClickCount >= 5) {
+      setLogoClickCount(0);
+      navigate("/kitty");
+    } else {
+      setLogoClickCount(logoClickCount + 1);
+    }
+  };
+
   return (
     <>
       <nav
         className="navbar navbar-dark navbar-expand-sm rounded-bottom shadow"
         style={{ backgroundColor: "#0d47a1" }}
       >
-        <a href="#" className="navbar-brand m-0 h1">
+        <span onClick={handleLogoClick} className="navbar-brand m-0 h1">
           <img
             src="src/assets/ShopBlockIcon_small.png"
             width="40"
@@ -38,7 +51,7 @@ function Navbar() {
             className="d-inline-block align-center ms-2 me-2"
           />
           BE Web Portal
-        </a>
+        </span>
         <button
           className="navbar-toggler"
           type="button"
