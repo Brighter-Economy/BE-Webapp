@@ -3,20 +3,26 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 interface DataRowParameters {
-  datetime: string;
+  type: string;
+  datetime: number;
   to: string;
   from: string;
   amount: string;
 }
 
 const DataRow: React.FC<DataRowParameters> = ({
+  type,
   datetime,
   to,
   from,
   amount,
 }) => (
   <tr>
-    <td>{datetime}</td>
+    <td>
+      <i className="bi bi-arrow-left-right"></i>
+      <span className="fst-italic">{" " + type}</span>
+    </td>
+    <td>{new Date(datetime * 1000).toLocaleString()}</td>
     <td>{to}</td>
     <td>{from}</td>
     <td>{amount}</td>
@@ -27,6 +33,7 @@ interface PlayerAccountModalParams {
   shouldShow: () => boolean;
   onClose: () => void;
   playerAccount: () => {
+    type: string;
     uuid: string;
     username: string;
     money: number;
@@ -54,56 +61,60 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
       </Modal.Header>
       <Modal.Body>
         <div className="rounded shadow d-flex">
-          <img
-            src={"https://mc-heads.net/body/" + uuid}
-            className="p-2 rounded"
-          />
           <div className="w-100 ms-2">
-            <div className="input-group mb-2">
-              <span className="input-group-text">UUID</span>
-              <input
-                type="input-group-text"
-                className="form-control"
-                disabled={true}
-                placeholder={uuid}
+            <div className="d-flex">
+              <img
+                src={"https://mc-heads.net/head/" + uuid}
+                className="rounded pe-4"
               />
-            </div>
-            <div className="d-flex mb-2">
-              <div className="input-group">
-                <span className="input-group-text">Username</span>
-                <input
-                  type="input-group-text"
-                  className="form-control"
-                  disabled={true}
-                  placeholder={username}
-                />
-              </div>
-            </div>
-            <div className="d-flex mb-2">
-              <div className="input-group me-2">
-                <span className="input-group-text">Balance</span>
-                <input
-                  type="input-group-text"
-                  className="form-control"
-                  disabled={false}
-                  placeholder={money.toString()}
-                />
-              </div>
-              <div className="input-group">
-                <div className="input-group-text">
+              <div className="my-auto">
+                <div className="input-group mb-2">
+                  <span className="input-group-text">UUID</span>
                   <input
-                    className="form-check-input mt-0"
-                    type="checkbox"
-                    value=""
-                    checked={locked}
+                    type="input-group-text"
+                    className="form-control"
+                    disabled={true}
+                    placeholder={uuid}
                   />
                 </div>
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Locked"
-                  disabled={true}
-                />
+                <div className="d-flex mb-2">
+                  <div className="input-group">
+                    <span className="input-group-text">Username</span>
+                    <input
+                      type="input-group-text"
+                      className="form-control"
+                      disabled={true}
+                      placeholder={username}
+                    />
+                  </div>
+                </div>
+                <div className="d-flex mb-2">
+                  <div className="input-group me-2">
+                    <span className="input-group-text">Balance</span>
+                    <input
+                      type="input-group-text"
+                      className="form-control"
+                      disabled={false}
+                      placeholder={money.toString()}
+                    />
+                  </div>
+                  <div className="input-group">
+                    <div className="input-group-text">
+                      <input
+                        className="form-check-input mt-0"
+                        type="checkbox"
+                        value=""
+                        checked={locked}
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Locked"
+                      disabled={true}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div className="d-flex">
@@ -114,9 +125,11 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                 <i>{uuid}</i>
               </span>
             </div>
-            <table className="table table-dark table-hover rounded-2 overflow-hidden">
+
+            <table className="table table-dark table-hover rounded-2 overflow-hidden table-sm">
               <thead>
                 <tr>
+                  <th scope="col">Type</th>
                   <th scope="col">Timestamp</th>
                   <th scope="col">To</th>
                   <th scope="col">From</th>
@@ -125,31 +138,36 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
               </thead>
               <tbody>
                 <DataRow
-                  datetime="1735453443"
+                  type="Transfer"
+                  datetime={1735453443}
                   to="bright_spark"
                   from="CasualCynic"
                   amount="216"
                 />
                 <DataRow
-                  datetime="1735457043"
+                  type="Transfer"
+                  datetime={1735457043}
                   to="bright_spark"
                   from="CasualCynic"
                   amount="572"
                 />
                 <DataRow
-                  datetime="1735496643"
+                  type="Transfer"
+                  datetime={1735496643}
                   to="CasualCynic"
                   from="bright_spark"
                   amount="1100"
                 />
                 <DataRow
-                  datetime="1736058243"
+                  type="Transfer"
+                  datetime={1736058243}
                   to="bright_spark"
                   from="CasualCynic"
                   amount="612"
                 />
                 <DataRow
-                  datetime="1738131843"
+                  type="Transfer"
+                  datetime={1738131843}
                   to="CasualCynic"
                   from="bright_spark"
                   amount="516"
