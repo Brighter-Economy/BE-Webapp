@@ -1,15 +1,9 @@
 import { useEffect, useState } from "react";
 import BasicTable from "./BasicTable";
 import PlayerAccountModal from "./PlayerAccountModal";
+import { PlayerAccount } from "./types";
 
-interface PlayerAccount {
-  uuid: string;
-  username: string;
-  locked: boolean;
-  money: number;
-}
-
-const emptyPlayerAccount = {
+const emptyPlayerAccount: PlayerAccount = {
   uuid: "",
   username: "",
   locked: false,
