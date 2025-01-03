@@ -113,8 +113,15 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                     />
                   </div>
                 </div>
-                <div className="d-flex mb-2">
-                  <div className="input-group"></div>
+                <div>
+                  <Button
+                    variant="primary"
+                    className="w-100"
+                    style={{ backgroundColor: "#0d47a1", borderWidth: "0" }}
+                    onClick={() => navigate("/" + uuid)}
+                  >
+                    Open Player Details
+                  </Button>
                 </div>
               </div>
             </div>
@@ -122,9 +129,6 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
               <h5 className="me-auto align-bottom">
                 <i>Last 5 Transactions</i>
               </h5>
-              <span className="ms-auto align-bottom text-secondary">
-                <i>{uuid}</i>
-              </span>
             </div>
 
             <table className="table table-dark table-hover rounded-2 overflow-hidden table-sm">
@@ -179,22 +183,18 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <div className="d-flex w-100">
-          <div className="ms-auto">
-            <Button variant="danger" onClick={onClose}>
-              Close
-            </Button>
-          </div>
-          <Button
-            variant="primary"
-            style={{
-              backgroundColor: "#0d47a1",
-              borderWidth: "0",
-            }}
-          >
-            Understood
-          </Button>
-        </div>
+        <Button variant="danger" onClick={onClose}>
+          Close
+        </Button>
+        <Button
+          variant="primary"
+          style={{
+            backgroundColor: "#0d47a1",
+            borderWidth: "0",
+          }}
+        >
+          Save
+        </Button>
       </Modal.Footer>
     </Modal>
   );
