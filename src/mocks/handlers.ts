@@ -21,8 +21,18 @@ export const handlers = [
     );
   }),
 
-  http.get("/api/transactions", () => {
-    return HttpResponse.json(mockTransactionData);
+  http.get("/api/transactions", ({ request }) => {
+    const searchParams = new URL(request.url).searchParams;
+    const limitParam = searchParams.get("limit");
+    const sortParam = searchParams.get("sort");
+
+    let transactions = mockTransactionData;
+    transactions =
+      sortParam === "asc"
+        ? transactions.sort((t1, t2) => t1.timestamp - t2.timestamp)
+        : transactions.sort((t1, t2) => t2.timestamp - t1.timestamp);
+    if (limitParam) transactions = transactions.slice(0, Number(limitParam));
+    return HttpResponse.json(transactions);
   }),
 
   http.get("/api/transactions/:uuid", ({ request, params }) => {
