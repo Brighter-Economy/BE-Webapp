@@ -4,14 +4,11 @@ import { useEffect } from "react";
 function Test() {
   const { testId } = useParams();
 
-  // Regular expression to validate a UUID
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
   useEffect(() => {
     if (!uuidRegex.test(testId!)) {
-      // Handle invalid UUID (e.g., redirect, show an error message, etc.)
       console.error("Invalid UUID:", testId);
-      // You can redirect or show an error message here
     }
   }, [testId]);
 
