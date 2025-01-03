@@ -58,7 +58,7 @@ enableMocking().then(() => {
           element: <Kitty />,
         },
         {
-          path: "/:testId",
+          path: "/players/:uuid",
           element: <Test />,
         },
       ],
