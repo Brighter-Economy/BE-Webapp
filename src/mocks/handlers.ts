@@ -1,4 +1,4 @@
-import { http, HttpResponse } from "msw";
+import { delay, http, HttpResponse } from "msw";
 import mockPlayerData from "../assets/MOCK_PLAYER_DATA.json";
 import mockTransactionData from "../assets/MOCK_TRANSACTION_DATA.json";
 
@@ -21,7 +21,7 @@ export const handlers = [
     );
   }),
 
-  http.get("/api/transactions", ({ request }) => {
+  http.get("/api/transactions", async ({ request }) => {
     const searchParams = new URL(request.url).searchParams;
     const limitParam = searchParams.get("limit");
     const sortParam = searchParams.get("sort");
@@ -32,10 +32,12 @@ export const handlers = [
         ? transactions.sort((t1, t2) => t1.timestamp - t2.timestamp)
         : transactions.sort((t1, t2) => t2.timestamp - t1.timestamp);
     if (limitParam) transactions = transactions.slice(0, Number(limitParam));
+
+    await delay();
     return HttpResponse.json(transactions);
   }),
 
-  http.get("/api/transactions/:uuid", ({ request, params }) => {
+  http.get("/api/transactions/:uuid", async ({ request, params }) => {
     const searchParams = new URL(request.url).searchParams;
     const limitParam = searchParams.get("limit");
     const sortParam = searchParams.get("sort");
@@ -49,6 +51,8 @@ export const handlers = [
         ? transactions.sort((t1, t2) => t1.timestamp - t2.timestamp)
         : transactions.sort((t1, t2) => t2.timestamp - t1.timestamp);
     if (limitParam) transactions = transactions.slice(0, Number(limitParam));
+
+    await delay();
     return HttpResponse.json(transactions);
   }),
 ];
