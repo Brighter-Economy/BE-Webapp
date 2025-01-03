@@ -54,10 +54,15 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
       <DataRow key={transaction.id} transaction={transaction} />
     )) ?? [];
 
+  const onModalClose = () => {
+    onClose();
+    setTransactions(undefined);
+  };
+
   return (
     <Modal
       show={shouldShow()}
-      onHide={onClose}
+      onHide={onModalClose}
       backdrop="static"
       keyboard={true}
       className="modal-lg"
@@ -146,7 +151,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={onClose}>
+        <Button variant="danger" onClick={onModalClose}>
           Close
         </Button>
         <Button
