@@ -14,6 +14,7 @@ import ServerShops from "./pages/ServerShops.tsx";
 import Settings from "./pages/Settings.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Kitty from "./pages/Kitty.tsx";
+import LoginPage from "./pages/LoginPage.tsx";
 
 async function enableMocking() {
   if (process.env.NODE_ENV === "development") {
@@ -32,6 +33,10 @@ enableMocking().then(() => {
         {
           path: "/",
           element: <TestPage />,
+        },
+        {
+          path: "/login",
+          element: <LoginPage />,
         },
         {
           path: "/auctions",
