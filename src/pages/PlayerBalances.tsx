@@ -21,9 +21,6 @@ function PlayerBalances() {
             <i className="bi bi-search" />
           </span>
         </div>
-<<<<<<< HEAD
-        <button type="button" className="btn btn-primary ms-auto">
-=======
         <div className="form-check me-3">
           <input
             type="checkbox"
@@ -44,15 +41,11 @@ function PlayerBalances() {
             borderWidth: "0",
           }}
         >
->>>>>>> origin/main
           Refresh
         </button>
       </div>
       <div className="p-3">
-        <PlayerBalancesTable
-          searchQuery={searchQuery}
-          isLocked={isLocked}
-        />
+        <PlayerBalancesTable searchQuery={searchQuery} isLocked={isLocked} />
       </div>
     </>
   );
