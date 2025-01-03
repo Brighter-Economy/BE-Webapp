@@ -45,10 +45,7 @@ function PlayerBalances() {
         </button>
       </div>
       <div className="p-3">
-        <PlayerBalancesTable
-          searchQuery={searchQuery}
-          isLocked={isLocked}
-        />
+        <PlayerBalancesTable searchQuery={searchQuery} isLocked={isLocked} />
       </div>
     </>
   );
