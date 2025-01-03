@@ -15,14 +15,7 @@ function PlayerBalances() {
             <i className="bi bi-search" />
           </span>
         </div>
-        <button
-          type="button"
-          className="btn btn-primary ms-auto"
-          style={{
-            backgroundColor: "#0d47a1",
-            borderWidth: "0",
-          }}
-        >
+        <button type="button" className="btn btn-primary ms-auto">
           Refresh
         </button>
       </div>

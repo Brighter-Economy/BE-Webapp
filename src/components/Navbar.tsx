@@ -39,10 +39,7 @@ function Navbar() {
 
   return (
     <>
-      <nav
-        className="navbar navbar-dark navbar-expand-sm rounded-bottom shadow"
-        style={{ backgroundColor: "#0d47a1" }}
-      >
+      <nav className="navbar navbar-dark navbar-expand-sm rounded-bottom shadow bg-primary">
         <span onClick={handleLogoClick} className="navbar-brand m-0 h1">
           <img
             src="src/assets/ShopBlockIcon_small.png"

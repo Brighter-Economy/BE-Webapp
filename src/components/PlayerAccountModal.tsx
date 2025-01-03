@@ -9,18 +9,64 @@ interface DataRowParameters {
   transaction: Transaction;
 }
 
-const DataRow: React.FC<DataRowParameters> = ({ transaction }) => (
-  <tr>
-    <td>
-      <i className="bi bi-arrow-left-right"></i>
-      <span className="fst-italic">{" " + transaction.type}</span>
-    </td>
-    <td>{new Date(transaction.timestamp * 1000).toLocaleString()}</td>
-    <td>{transaction.uuidTo}</td>
-    <td>{transaction.uuidFrom}</td>
-    <td>{transaction.money}</td>
-  </tr>
-);
+interface TypeDisplayParameters {
+  typeName: string;
+}
+
+const TypeDisplay: React.FC<TypeDisplayParameters> = ({ typeName }) => {
+  if (typeName === "MODIFY") {
+    return (
+      <>
+        <i className="bi bi-pencil-fill" />
+        <span className="fst-italic">{" MODIFY"}</span>
+      </>
+    );
+  } else if (typeName === "TRANSFER") {
+    return (
+      <>
+        <i className="bi bi-arrow-left-right" />
+        <span className="fst-italic">{" TRANSFER"}</span>
+      </>
+    );
+  } else if (typeName === "PURCHASE") {
+    return (
+      <>
+        <i className="bi bi-bank2" />
+        <span className="fst-italic">{" PURCHASE"}</span>
+      </>
+    );
+  }
+};
+
+const DataRow: React.FC<DataRowParameters> = ({ transaction }) => {
+  if (transaction.nameFrom) {
+    return (
+      <tr>
+        <td>
+          <TypeDisplay typeName={transaction.type} />
+        </td>
+        <td>{new Date(transaction.timestamp * 1000).toLocaleString()}</td>
+        <td>{transaction.nameTo}</td>
+        <td>{transaction.nameFrom}</td>
+        <td>{transaction.money}</td>
+      </tr>
+    );
+  } else {
+    return (
+      <tr className="table-warning">
+        <td>
+          <TypeDisplay typeName={transaction.type} />
+        </td>
+        <td>{new Date(transaction.timestamp * 1000).toLocaleString()}</td>
+        <td>{transaction.nameTo}</td>
+        <td>
+          <span className="fst-italic">{"SERVER"}</span>
+        </td>
+        <td>{transaction.money}</td>
+      </tr>
+    );
+  }
+};
 
 interface PlayerAccountModalParams {
   shouldShow: () => boolean;
@@ -125,7 +171,6 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                   <Button
                     variant="primary"
                     className="w-100"
-                    style={{ backgroundColor: "#0d47a1", borderWidth: "0" }}
                     onClick={() => navigate("/" + uuid)}
                   >
                     Open Player Details
@@ -149,15 +194,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
         <Button variant="danger" onClick={onClose}>
           Close
         </Button>
-        <Button
-          variant="primary"
-          style={{
-            backgroundColor: "#0d47a1",
-            borderWidth: "0",
-          }}
-        >
-          Save
-        </Button>
+        <Button variant="primary">Save</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -1,0 +1,9 @@
+$primary: #0d47a1;
+$yellow: #ffc107;
+
+$table-variants: (
+    "warning": rgba($yellow, 0.7)
+);
+
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import '../node_modules/bootstrap-icons/font/bootstrap-icons.css'

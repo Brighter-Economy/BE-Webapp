@@ -17,6 +17,8 @@ export interface Transaction {
   participants: string;
   uuidFrom: string | null;
   uuidTo: string | null;
+  nameFrom: string | null;
+  nameTo: string | null;
   money: number;
   itemPurchased: ItemDetails | null;
   timestamp: number;
