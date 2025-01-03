@@ -1,6 +1,10 @@
+import { useState } from "react";
 import PlayerBalancesTable from "../components/PlayerBalancesTable";
 
 function PlayerBalances() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isLocked, setIsLocked] = useState(false);
+
   return (
     <>
       <div className="pt-3 ps-3 pe-3 d-flex">
@@ -9,11 +13,25 @@ function PlayerBalances() {
           <input
             type="text"
             className="form-control"
-            placeholder="User Search"
+            placeholder="User  Search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <span className="input-group-text" id="basic-addon2">
             <i className="bi bi-search" />
           </span>
+        </div>
+        <div className="form-check me-3">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="lockedFilter"
+            checked={isLocked}
+            onChange={(e) => setIsLocked(e.target.checked)}
+          />
+          <label className="form-check-label" htmlFor="lockedFilter">
+            Show Locked Accounts
+          </label>
         </div>
         <button
           type="button"
@@ -27,7 +45,10 @@ function PlayerBalances() {
         </button>
       </div>
       <div className="p-3">
-        <PlayerBalancesTable />
+        <PlayerBalancesTable
+          searchQuery={searchQuery}
+          isLocked={isLocked}
+        />
       </div>
     </>
   );
