@@ -39,16 +39,18 @@ const DataRow: React.FC<DataRowParameters> = ({ playerAccount, onClick }) => (
   </tr>
 );
 
-const PlayerBalancesTable = () => {
+interface PlayerBalancesTableProps {
+  searchQuery: string;
+  isLocked: boolean;
+}
+
+const PlayerBalancesTable: React.FC<PlayerBalancesTableProps> = ({ searchQuery, isLocked }) => {
   const [playerAccounts, setPlayerAccounts] = useState<PlayerAccount[]>([]);
-  const [selectedPlayerAccount, setSelectedPlayerAccount] =
-    useState<PlayerAccount>(emptyPlayerAccount);
+  const [selectedPlayerAccount, setSelectedPlayerAccount] = useState<PlayerAccount>(emptyPlayerAccount);
   const [shouldShowModal, setShouldShowModal] = useState<boolean>(false);
 
   const updatePlayerAccounts = async () => {
-    const accountsJson = await fetch("/api/accounts").then((response) =>
-      response.json()
-    );
+    const accountsJson = await fetch("/api/accounts").then((response) => response.json());
     setPlayerAccounts(accountsJson);
   };
 
@@ -56,8 +58,15 @@ const PlayerBalancesTable = () => {
     updatePlayerAccounts();
   }, []);
 
+  const filteredPlayerAccounts = playerAccounts.filter((account) => {
+    const matchesSearch = account.username.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesLocked = isLocked ? account.locked : true;
+
+    return matchesSearch && matchesLocked;
+  });
+
   const DataRows = () =>
-    playerAccounts.map((element) => (
+    filteredPlayerAccounts.map((element) => (
       <DataRow
         key={element.uuid}
         playerAccount={element}
