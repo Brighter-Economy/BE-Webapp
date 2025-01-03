@@ -1,9 +1,5 @@
 node_modules/
 build/
-../dist/
-../pages/dist/
-../components/dist
-../assets/dist/
-../mocks/dist/
+**/dist/
 .vscode/
 .idea/
