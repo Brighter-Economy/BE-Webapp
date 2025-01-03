@@ -2,6 +2,7 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
+import { PlayerAccount } from "./types";
 
 interface DataRowParameters {
   type: string;
@@ -33,13 +34,7 @@ const DataRow: React.FC<DataRowParameters> = ({
 interface PlayerAccountModalParams {
   shouldShow: () => boolean;
   onClose: () => void;
-  playerAccount: () => {
-    type: string;
-    uuid: string;
-    username: string;
-    money: number;
-    locked: boolean;
-  };
+  playerAccount: () => PlayerAccount;
 }
 
 const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
