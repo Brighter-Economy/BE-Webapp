@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import { PlayerAccount, Transaction } from "./types";
 import BasicTable from "./BasicTable";
+import ErrorPage from "../pages/ErrorPage";
 
 interface DataRowParameters {
   transaction: Transaction;
@@ -91,6 +92,16 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
     setTransactions(transactionsJson);
   };
 
+  const handleUUIDRedirect = (uuid: string) => {
+    fetch("/api/accounts/" + uuid).catch((err) => {
+      console.log(err)
+      return <ErrorPage />
+    }).then((response) => {
+      console.log(response)
+      navigate("/players/" + uuid);
+    })
+  }
+
   useEffect(() => {
     updateTransactions();
   }, [uuid]);
@@ -176,7 +187,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                   <Button
                     variant="primary"
                     className="w-100"
-                    onClick={() => navigate("/" + uuid)}
+                    onClick={() => handleUUIDRedirect(uuid)}
                   >
                     Open Player Details
                   </Button>
