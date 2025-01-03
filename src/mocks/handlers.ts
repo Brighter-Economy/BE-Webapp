@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
 import mockPlayerData from "../assets/MOCK_PLAYER_DATA.json";
+import mockTransactionData from "../assets/MOCK_TRANSACTION_DATA.json";
 
 export const handlers = [
   http.get("/api/accounts", () => {
@@ -11,5 +12,33 @@ export const handlers = [
     return HttpResponse.json(
       mockPlayerData.find(({ uuid }) => uuid === uuidParam)
     );
+  }),
+
+  http.get("/api/accounts/:uuid/name", ({ params }) => {
+    const uuidParam = params.uuid;
+    return HttpResponse.json(
+      mockPlayerData.find(({ uuid }) => uuid === uuidParam)?.username
+    );
+  }),
+
+  http.get("/api/transactions", () => {
+    return HttpResponse.json(mockTransactionData);
+  }),
+
+  http.get("/api/transactions/:uuid", ({ request, params }) => {
+    const searchParams = new URL(request.url).searchParams;
+    const limitParam = searchParams.get("limit");
+    const sortParam = searchParams.get("sort");
+    const uuidParam = params.uuid;
+
+    let transactions = mockTransactionData.filter(
+      ({ uuidFrom, uuidTo }) => uuidFrom === uuidParam || uuidTo === uuidParam
+    );
+    transactions =
+      sortParam === "asc"
+        ? transactions.sort((t1, t2) => t1.timestamp - t2.timestamp)
+        : transactions.sort((t1, t2) => t2.timestamp - t1.timestamp);
+    if (limitParam) transactions = transactions.slice(0, Number(limitParam));
+    return HttpResponse.json(transactions);
   }),
 ];

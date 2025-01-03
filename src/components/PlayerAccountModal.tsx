@@ -1,33 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
-import { PlayerAccount } from "./types";
+import { PlayerAccount, Transaction } from "./types";
+import BasicTable from "./BasicTable";
 
 interface DataRowParameters {
-  type: string;
-  datetime: number;
-  to: string;
-  from: string;
-  amount: string;
+  transaction: Transaction;
 }
 
-const DataRow: React.FC<DataRowParameters> = ({
-  type,
-  datetime,
-  to,
-  from,
-  amount,
-}) => (
+const DataRow: React.FC<DataRowParameters> = ({ transaction }) => (
   <tr>
     <td>
       <i className="bi bi-arrow-left-right"></i>
-      <span className="fst-italic">{" " + type}</span>
+      <span className="fst-italic">{" " + transaction.type}</span>
     </td>
-    <td>{new Date(datetime * 1000).toLocaleString()}</td>
-    <td>{to}</td>
-    <td>{from}</td>
-    <td>{amount}</td>
+    <td>{new Date(transaction.timestamp * 1000).toLocaleString()}</td>
+    <td>{transaction.uuidTo}</td>
+    <td>{transaction.uuidFrom}</td>
+    <td>{transaction.money}</td>
   </tr>
 );
 
@@ -42,9 +33,26 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
   onClose,
   playerAccount,
 }) => {
+  const navigate = useNavigate();
+  const [transactions, setTransactions] = useState<Transaction[]>();
+
   const { uuid, username, money, locked } = playerAccount();
 
-  let navigate = useNavigate();
+  const updateTransactions = async () => {
+    const transactionsJson = await fetch(
+      "/api/transactions/" + uuid + "?limit=5&sort=desc"
+    ).then((response) => response.json());
+    setTransactions(transactionsJson);
+  };
+
+  useEffect(() => {
+    updateTransactions();
+  }, [uuid]);
+
+  const TransactionRows = () =>
+    transactions?.map((transaction) => (
+      <DataRow key={transaction.id} transaction={transaction} />
+    )) ?? [];
 
   return (
     <Modal
@@ -130,55 +138,10 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                 <i>Last 5 Transactions</i>
               </h5>
             </div>
-
-            <table className="table table-dark table-hover rounded-2 overflow-hidden table-sm">
-              <thead>
-                <tr>
-                  <th scope="col">Type</th>
-                  <th scope="col">Timestamp</th>
-                  <th scope="col">To</th>
-                  <th scope="col">From</th>
-                  <th scope="col">Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <DataRow
-                  type="Transfer"
-                  datetime={1735453443}
-                  to="bright_spark"
-                  from="CasualCynic"
-                  amount="216"
-                />
-                <DataRow
-                  type="Transfer"
-                  datetime={1735457043}
-                  to="bright_spark"
-                  from="CasualCynic"
-                  amount="572"
-                />
-                <DataRow
-                  type="Transfer"
-                  datetime={1735496643}
-                  to="CasualCynic"
-                  from="bright_spark"
-                  amount="1100"
-                />
-                <DataRow
-                  type="Transfer"
-                  datetime={1736058243}
-                  to="bright_spark"
-                  from="CasualCynic"
-                  amount="612"
-                />
-                <DataRow
-                  type="Transfer"
-                  datetime={1738131843}
-                  to="CasualCynic"
-                  from="bright_spark"
-                  amount="516"
-                />
-              </tbody>
-            </table>
+            <BasicTable
+              headers={["Type", "Timestamp", "To", "From", "Amount"]}
+              rows={TransactionRows()}
+            />
           </div>
         </div>
       </Modal.Body>
