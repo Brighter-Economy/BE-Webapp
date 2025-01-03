@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useNavigate } from "react-router-dom";
 
 interface DataRowParameters {
   type: string;
@@ -47,6 +48,8 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
   playerAccount,
 }) => {
   const { uuid, username, money, locked } = playerAccount();
+
+  let navigate = useNavigate();
 
   return (
     <Modal
@@ -115,6 +118,9 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                     />
                   </div>
                 </div>
+                <div className="d-flex mb-2">
+                  <div className="input-group"></div>
+                </div>
               </div>
             </div>
             <div className="d-flex">
@@ -178,18 +184,22 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={onClose}>
-          Close
-        </Button>
-        <Button
-          variant="primary"
-          style={{
-            backgroundColor: "#0d47a1",
-            borderWidth: "0",
-          }}
-        >
-          Understood
-        </Button>
+        <div className="d-flex w-100">
+          <div className="ms-auto">
+            <Button variant="danger" onClick={onClose}>
+              Close
+            </Button>
+          </div>
+          <Button
+            variant="primary"
+            style={{
+              backgroundColor: "#0d47a1",
+              borderWidth: "0",
+            }}
+          >
+            Understood
+          </Button>
+        </div>
       </Modal.Footer>
     </Modal>
   );
