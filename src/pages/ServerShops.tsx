@@ -38,9 +38,12 @@ const ShopCol: React.FC<ShopDetails> = ({
         <div className="m-3">
           <div className="d-flex mb-3">
             <img
-              src={"https://mc-heads.net/avatar/" + ownerUuid}
-              className="img-fluid rounded-4 me-2"
-              style={{ width: 120 }}
+              onError={() => {
+                if (imageSrc !== fallbackSrc) setImageSrc(fallbackSrc);
+              }}
+              src={imageSrc}
+              className="img-fluid rounded me-2 shadow"
+              style={{ width: 80, imageRendering: "pixelated" }}
             />
             <div className="m-2 text-start my-auto">
               <Link to={"/players/" + ownerUuid} style={{ color: "#FFFFFF" }}>
@@ -52,16 +55,6 @@ const ShopCol: React.FC<ShopDetails> = ({
             </div>
           </div>
           <div className="d-flex">
-            <div className="d-flex bg-primary me-2 rounded">
-              <img
-                onError={() => {
-                  if (imageSrc !== fallbackSrc) setImageSrc(fallbackSrc);
-                }}
-                src={imageSrc}
-                className="img-fluid my-auto m-1 me-2"
-                style={{ width: 40, height: 40 }}
-              />
-            </div>
             <div>
               <div
                 className="input-group mb-1"
@@ -76,6 +69,9 @@ const ShopCol: React.FC<ShopDetails> = ({
                   disabled={true}
                   placeholder={id}
                 />
+                <span className="input-group-text">
+                  <i className="bi bi-clipboard2" />
+                </span>
               </div>
               <div
                 className="input-group mb-1"
@@ -94,6 +90,9 @@ const ShopCol: React.FC<ShopDetails> = ({
                     item.count + " @ " + curPreflix + price.toString()
                   }
                 />
+                <span className="input-group-text">
+                  <i className="bi bi-clipboard2" />
+                </span>
               </div>
               <div
                 className="input-group mb-1"
@@ -101,13 +100,16 @@ const ShopCol: React.FC<ShopDetails> = ({
                   navigator.clipboard.writeText(item.item);
                 }}
               >
-                <span className="input-group-text">For Sell:</span>
+                <span className="input-group-text">Item:</span>
                 <input
                   type="input-group-text"
                   className="form-control"
                   disabled={true}
                   placeholder={item.item}
                 />
+                <span className="input-group-text">
+                  <i className="bi bi-clipboard2" />
+                </span>
               </div>
             </div>
           </div>
@@ -163,8 +165,35 @@ function PlayerShops() {
   return (
     <>
       <div className="d-flex">
-        <div className="pt-3 ps-3 pe-3 d-flex">
+        <div className="pt-3 ps-3 pe-3 d-flex w-50">
           <h1 className="display-6">Player Shops</h1>
+        </div>
+        <div className="d-flex ms-3 my-auto container-fluid">
+          <div
+            className="input-group input-group ms-auto me-3"
+            style={{ height: 50 }}
+          >
+            <input
+              type="text"
+              className="form-control"
+              placeholder="User or Item Search..."
+            />
+            <span className="input-group-text" id="basic-addon2">
+              <i className="bi bi-search" />
+            </span>
+          </div>
+
+          <button
+            type="button"
+            className="btn btn-primary ms-auto"
+            style={{
+              backgroundColor: "#0d47a1",
+              borderWidth: "0",
+              height: 50,
+            }}
+          >
+            Refresh
+          </button>
         </div>
       </div>
       <div className="container w-100 d-flex">

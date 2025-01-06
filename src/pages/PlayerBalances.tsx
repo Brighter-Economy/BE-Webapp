@@ -7,7 +7,7 @@ function PlayerBalances() {
 
   return (
     <>
-      <div className="pt-3 ps-3 pe-3 d-flex">
+      <div className="p-3 pb-0 d-flex">
         <div className="container-fluid">
           <h1 className="display-6 w-100">Player Information</h1>
           <div className="form-check form-switch me-3 w-100">
@@ -29,7 +29,7 @@ function PlayerBalances() {
             <input
               type="text"
               className="form-control"
-              placeholder="User Search"
+              placeholder="User Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />

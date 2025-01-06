@@ -151,6 +151,9 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                     disabled={true}
                     placeholder={uuid}
                   />
+                  <span className="input-group-text">
+                    <i className="bi bi-clipboard2" />
+                  </span>
                 </div>
                 <div
                   className="d-flex mb-2"
@@ -166,6 +169,9 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                       disabled={true}
                       placeholder={username}
                     />
+                    <span className="input-group-text">
+                      <i className="bi bi-clipboard2" />
+                    </span>
                   </div>
                 </div>
                 <div className="d-flex mb-2">
@@ -182,6 +188,9 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                       disabled={false}
                       placeholder={money.toString()}
                     />
+                    <span className="input-group-text">
+                      <i className="bi bi-clipboard2" />
+                    </span>
                   </div>
                   <div className="input-group">
                     <div className="input-group-text">
