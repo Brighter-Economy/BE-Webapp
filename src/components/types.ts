@@ -23,3 +23,11 @@ export interface Transaction {
   itemPurchased: ItemDetails | null;
   timestamp: number;
 }
+
+export interface ShopDetails {
+  id: string;
+  ownerUuid: string;
+  ownerName: string;
+  item: ItemDetails;
+  price: number;
+}
