@@ -93,14 +93,16 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
   };
 
   const handleUUIDRedirect = (uuid: string) => {
-    fetch("/api/accounts/" + uuid).catch((err) => {
-      console.log(err)
-      return <ErrorPage />
-    }).then((response) => {
-      console.log(response)
-      navigate("/players/" + uuid);
-    })
-  }
+    fetch("/api/accounts/" + uuid)
+      .catch((err) => {
+        console.log(err);
+        return <ErrorPage />;
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/players/" + uuid);
+      });
+  };
 
   useEffect(() => {
     updateTransactions();
@@ -136,7 +138,12 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                 className="rounded pe-4"
               />
               <div className="my-auto">
-                <div className="input-group mb-2">
+                <div
+                  className="input-group mb-2"
+                  onClick={() => {
+                    navigator.clipboard.writeText(uuid);
+                  }}
+                >
                   <span className="input-group-text">UUID</span>
                   <input
                     type="input-group-text"
@@ -145,7 +152,12 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                     placeholder={uuid}
                   />
                 </div>
-                <div className="d-flex mb-2">
+                <div
+                  className="d-flex mb-2"
+                  onClick={() => {
+                    navigator.clipboard.writeText(username);
+                  }}
+                >
                   <div className="input-group">
                     <span className="input-group-text">Username</span>
                     <input
@@ -157,7 +169,12 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                   </div>
                 </div>
                 <div className="d-flex mb-2">
-                  <div className="input-group me-2">
+                  <div
+                    className="input-group me-2"
+                    onClick={() => {
+                      navigator.clipboard.writeText(money.toString());
+                    }}
+                  >
                     <span className="input-group-text">Balance</span>
                     <input
                       type="input-group-text"
