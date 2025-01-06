@@ -59,8 +59,8 @@ const PlayerBalancesTable: React.FC<PlayerBalancesTableProps> = ({ searchQuery, 
   }, []);
 
   const filteredPlayerAccounts = playerAccounts.filter((account) => {
-    const matchesSearch = account.username.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesLocked = isLocked ? account.locked : true;
+    const matchesSearch = account.username.toLowerCase().startsWith(searchQuery.toLowerCase());
+    const matchesLocked = isLocked ? account.locked : !account.locked;
 
     return matchesSearch && matchesLocked;
   });
