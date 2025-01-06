@@ -81,9 +81,7 @@ const ShopCol: React.FC<ShopDetails> = ({
 };
 
 function PlayerShops() {
-  const [playerNameFilter, setPlayerNameFilter] = useState("");
-  const [shopUuidFilter, setShopUuidFilter] = useState("");
-  const [itemNameFilter, setItemNameFilter] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const dSword: ItemDetails = {
     item: "minecraft:diamond_sword",
@@ -130,11 +128,13 @@ function PlayerShops() {
   const shops = [shop1, shop2, shop3];
 
   const filteredShops = shops.filter((shop) => {
-    const matchesPlayerName = shop.ownerName.toLowerCase().startsWith(playerNameFilter.toLowerCase());
-    const matchesShopUuid = shop.id.startsWith(shopUuidFilter);
-    const matchesItemName = getPrettyItemName(shop.item.item).toLowerCase().startsWith(itemNameFilter.toLowerCase());
-
-    return matchesPlayerName && matchesShopUuid && matchesItemName;
+    const lowerCaseQuery = searchQuery.toLowerCase();
+    return (
+      shop.ownerName.toLowerCase().includes(lowerCaseQuery) ||
+      shop.ownerUuid.toLowerCase().includes(lowerCaseQuery) ||
+      shop.id.toLowerCase().includes(lowerCaseQuery) ||
+      shop.item.item.toLowerCase().includes(lowerCaseQuery)
+    )
   });
 
   return (
@@ -146,24 +146,10 @@ function PlayerShops() {
         <div className="d-flex ms-3 my-auto container-fluid">
           <input
             type="text"
-            className="form-control me-2"
-            placeholder="Player Name"
-            value={playerNameFilter}
-            onChange={(e) => setPlayerNameFilter(e.target.value)}
-          />
-          <input
-            type="text"
-            className="form-control me-2"
-            placeholder="Shop UUID"
-            value={shopUuidFilter}
-            onChange={(e) => setShopUuidFilter(e.target.value)}
-          />
-          <input
-            type="text"
-            className="form-control me-2"
-            placeholder="Item Name"
-            value={itemNameFilter}
-            onChange={(e) => setItemNameFilter(e.target.value)}
+            className="form-control mb-3"
+            placeholder="Search by Player Name, Shop UUID, or Item Name"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button
             type="button"
