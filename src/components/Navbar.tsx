@@ -65,7 +65,7 @@ function Navbar() {
             <ul className="navbar-nav">
               <NavLink path="/items" content="Items" />
               <NavLink path="/players" content="Players" />
-              <NavLink path="/servershops" content="Server Shops" />
+              <NavLink path="/servershops" content="Shops" />
               <NavLink path="/auctions" content="Auctions" />
               <NavLink
                 path="/settings"
