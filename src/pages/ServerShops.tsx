@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 
 function getItemImage(itemName: string) {
   let itemImg = new Image();
-  itemImg.src =
-    "src/assets/item_images/" + itemName.replace(":", "_") + ".png";
+  itemImg.src = "src/assets/item_images/" + itemName.replace(":", "_") + ".png";
   return itemImg.src;
 }
 
@@ -30,7 +29,10 @@ const ShopCol: React.FC<ShopDetails> = ({
   const curPreflix = "$";
 
   return (
-    <div className="bg-secondary m-3 shadow rounded-2 flex" style={{ width: 400 }}>
+    <div
+      className="bg-secondary m-3 shadow rounded-2 flex"
+      style={{ width: 400 }}
+    >
       <div className="m-3">
         <div className="d-flex mb-3">
           <img
@@ -52,23 +54,51 @@ const ShopCol: React.FC<ShopDetails> = ({
         </div>
         <div className="d-flex">
           <div>
-            <div className="input-group mb-1" onClick={() => navigator.clipboard.writeText(id)}>
+            <div
+              className="input-group mb-1"
+              onClick={() => navigator.clipboard.writeText(id)}
+            >
               <span className="input-group-text">Shop ID:</span>
-              <input type="input-group-text" className="form-control" disabled={true} placeholder={id} />
+              <input
+                type="input-group-text"
+                className="form-control"
+                disabled={true}
+                placeholder={id}
+              />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
               </span>
             </div>
-            <div className="input-group mb-1" onClick={() => navigator.clipboard.writeText(item.count.toString() + "@" + price)}>
+            <div
+              className="input-group mb-1"
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  item.count.toString() + "@" + price
+                )
+              }
+            >
               <span className="input-group-text">Price:</span>
-              <input type="input-group-text" className="form-control" disabled={true} placeholder={item.count + " @ " + curPreflix + price.toString()} />
+              <input
+                type="input-group-text"
+                className="form-control"
+                disabled={true}
+                placeholder={item.count + " @ " + curPreflix + price.toString()}
+              />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
               </span>
             </div>
-            <div className="input-group mb-1" onClick={() => navigator.clipboard.writeText(item.item)}>
+            <div
+              className="input-group mb-1"
+              onClick={() => navigator.clipboard.writeText(item.item)}
+            >
               <span className="input-group-text">Item:</span>
-              <input type="input-group-text" className="form-control" disabled={true} placeholder={item.item} />
+              <input
+                type="input-group-text"
+                className="form-control"
+                disabled={true}
+                placeholder={item.item}
+              />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
               </span>
@@ -134,7 +164,7 @@ function PlayerShops() {
       shop.ownerUuid.toLowerCase().includes(lowerCaseQuery) ||
       shop.id.toLowerCase().includes(lowerCaseQuery) ||
       shop.item.item.toLowerCase().includes(lowerCaseQuery)
-    )
+    );
   });
 
   return (
@@ -143,10 +173,10 @@ function PlayerShops() {
         <div className="pt-3 ps-3 pe-3 d-flex w-50">
           <h1 className="display-6">Player Shops</h1>
         </div>
-        <div className="d-flex ms-3 my-auto container-fluid">
+        <div className="d-flex my-auto container-fluid">
           <input
             type="text"
-            className="form-control mb-3"
+            className="form-control me-3"
             placeholder="Search by Player Name, Shop UUID, or Item Name"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
