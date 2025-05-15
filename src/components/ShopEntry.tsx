@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ShopDetails } from "../components/types";
 import { Link } from "react-router-dom";
+import ItemToolTip from "./ItemToolTip";
 
 function getItemImage(itemName: string) {
   let itemImg = new Image();
@@ -35,14 +36,16 @@ const ShopEntry: React.FC<ShopDetails> = ({
     >
       <div className="m-3">
         <div className="d-flex mb-3">
-          <img
-            onError={() => {
-              if (imageSrc !== fallbackSrc) setImageSrc(fallbackSrc);
-            }}
-            src={imageSrc}
-            className="img-fluid rounded me-2 shadow"
-            style={{ width: 80, imageRendering: "pixelated" }}
-          />
+          <ItemToolTip>
+            <img
+              onError={() => {
+                if (imageSrc !== fallbackSrc) setImageSrc(fallbackSrc);
+              }}
+              src={imageSrc}
+              className="img-fluid rounded me-2 shadow"
+              style={{ width: 80, imageRendering: "pixelated" }}
+            />
+          </ItemToolTip>
           <div className="m-2 text-start my-auto">
             <Link to={"/players/" + ownerUuid} style={{ color: "#FFFFFF" }}>
               <h4>
