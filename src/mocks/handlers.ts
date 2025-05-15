@@ -1,6 +1,7 @@
 import { delay, http, HttpResponse } from "msw";
 import mockPlayerData from "../assets/MOCK_PLAYER_DATA.json";
 import mockTransactionData from "../assets/MOCK_TRANSACTION_DATA.json";
+import mockShopData from "../assets/MOCK_SHOP_DATA.json";
 
 export const handlers = [
   http.get("/api/accounts", () => {
@@ -54,5 +55,10 @@ export const handlers = [
 
     await delay();
     return HttpResponse.json(transactions);
+  }),
+
+  http.get("/api/shops", async () => {
+    await delay();
+    return HttpResponse.json(mockShopData);
   }),
 ];

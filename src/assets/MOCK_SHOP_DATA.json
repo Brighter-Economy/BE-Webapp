@@ -1,0 +1,20 @@
+[
+  {
+    "id": "28f7238d-1185-4b39-ab71-aa4da6b6fd58",
+    "ownerUuid": "00000000-0000-0000-0000-000000000000",
+    "ownerName": "Your Mum",
+    "dimension": "minecraft:overworld",
+    "position": {
+      "x": -136,
+      "y": 65,
+      "z": 2
+    },
+    "itemStack": {
+      "item": "minecraft:diamond",
+      "count": 1,
+      "enchantments": null,
+      "lore": null
+    },
+    "price": 150
+  }
+]
