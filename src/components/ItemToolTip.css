@@ -45,6 +45,7 @@
 .mc-font-lore {
     font-family: "Minecraftia";
     font-style: italic;
+    background-color: #00000000;
     color: #AA00AA;
     text-wrap: wrap;
     text-align: start;

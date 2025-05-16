@@ -24,10 +24,26 @@ export interface Transaction {
   timestamp: number;
 }
 
+export interface Position {
+  x: number;
+  y: number;
+  z: number;
+}
+
+export interface ItemStack {
+  item: string;
+  count: number;
+  enchantments: string[] | null;
+  lore: string | null;
+}
+
 export interface ShopDetails {
   id: string;
   ownerUuid: string;
   ownerName: string;
-  item: ItemDetails;
+  dimension: string;
+  position: Position;
+  itemStack: ItemStack;
   price: number;
 }
+

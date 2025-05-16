@@ -18,14 +18,14 @@ function getPrettyItemName(itemID: string) {
   return itemName;
 }
 
-const ShopEntry: React.FC<ShopDetails> = ({
-  id,
-  ownerUuid,
-  ownerName,
-  item,
-  price,
-}) => {
-  const [imageSrc, setImageSrc] = useState(getItemImage(item.item));
+interface ShopEntryParameters {
+  shopDetails: ShopDetails;
+}
+
+const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
+  const [imageSrc, setImageSrc] = useState(
+    getItemImage(shopDetails.itemStack.item)
+  );
   const fallbackSrc = "src/assets/no_item_image.png";
   const curPreflix = "$";
 
@@ -36,7 +36,7 @@ const ShopEntry: React.FC<ShopDetails> = ({
     >
       <div className="m-3">
         <div className="d-flex mb-3">
-          <ItemToolTip>
+          <ItemToolTip itemStack={shopDetails.itemStack}>
             <img
               onError={() => {
                 if (imageSrc !== fallbackSrc) setImageSrc(fallbackSrc);
@@ -47,26 +47,29 @@ const ShopEntry: React.FC<ShopDetails> = ({
             />
           </ItemToolTip>
           <div className="m-2 text-start my-auto">
-            <Link to={"/players/" + ownerUuid} style={{ color: "#FFFFFF" }}>
+            <Link
+              to={"/players/" + shopDetails.ownerUuid}
+              style={{ color: "#FFFFFF" }}
+            >
               <h4>
-                <strong>{ownerName}'s</strong>
+                <strong>{shopDetails.ownerName}'s</strong>
               </h4>
             </Link>
-            <h4>{getPrettyItemName(item.item)} Shop</h4>
+            <h4>{getPrettyItemName(shopDetails.itemStack.item)} Shop</h4>
           </div>
         </div>
         <div className="d-flex">
           <div>
             <div
               className="input-group mb-1"
-              onClick={() => navigator.clipboard.writeText(id)}
+              onClick={() => navigator.clipboard.writeText(shopDetails.id)}
             >
               <span className="input-group-text">Shop ID:</span>
               <input
                 type="input-group-text"
                 className="form-control"
                 disabled={true}
-                placeholder={id}
+                placeholder={shopDetails.id}
               />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
@@ -76,7 +79,9 @@ const ShopEntry: React.FC<ShopDetails> = ({
               className="input-group mb-1"
               onClick={() =>
                 navigator.clipboard.writeText(
-                  item.count.toString() + "@" + price
+                  shopDetails.itemStack.count.toString() +
+                    "@" +
+                    shopDetails.price
                 )
               }
             >
@@ -85,7 +90,12 @@ const ShopEntry: React.FC<ShopDetails> = ({
                 type="input-group-text"
                 className="form-control"
                 disabled={true}
-                placeholder={item.count + " @ " + curPreflix + price.toString()}
+                placeholder={
+                  shopDetails.itemStack.count +
+                  " @ " +
+                  curPreflix +
+                  shopDetails.price.toString()
+                }
               />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
@@ -93,14 +103,16 @@ const ShopEntry: React.FC<ShopDetails> = ({
             </div>
             <div
               className="input-group mb-1"
-              onClick={() => navigator.clipboard.writeText(item.item)}
+              onClick={() =>
+                navigator.clipboard.writeText(shopDetails.itemStack.item)
+              }
             >
               <span className="input-group-text">Item:</span>
               <input
                 type="input-group-text"
                 className="form-control"
                 disabled={true}
-                placeholder={item.item}
+                placeholder={shopDetails.itemStack.item}
               />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
