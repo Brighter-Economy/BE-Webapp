@@ -12,7 +12,7 @@
     "itemStack": {
       "item": "minecraft:diamond",
       "count": 1,
-      "enchantments": [],
+      "enchantments": null,
       "lore": null
     },
     "price": 50
@@ -66,7 +66,7 @@
     "itemStack": {
       "item": "minecraft:netherrack",
       "count": 64,
-      "enchantments": [],
+      "enchantments": null,
       "lore": null
     },
     "price": 5
@@ -84,7 +84,7 @@
     "itemStack": {
       "item": "minecraft:diamond",
       "count": 2,
-      "enchantments": [],
+      "enchantments": null,
       "lore": null
     },
     "price": 70
@@ -102,7 +102,7 @@
     "itemStack": {
       "item": "minecraft:golden_carrot",
       "count": 64,
-      "enchantments": [],
+      "enchantments": null,
       "lore": null
     },
     "price": 180
@@ -192,7 +192,7 @@
     "itemStack": {
       "item": "minecraft:netherite_scrap",
       "count": 1,
-      "enchantments": [],
+      "enchantments": null,
       "lore": null
     },
     "price": 250
@@ -210,7 +210,7 @@
     "itemStack": {
       "item": "minecraft:saddle",
       "count": 1,
-      "enchantments": [],
+      "enchantments": null,
       "lore": null
     },
     "price": 40

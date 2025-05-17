@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { ShopDetails } from "../components/types";
+import { ItemStack, ShopDetails } from "../components/types";
 import { Link } from "react-router-dom";
 import ItemToolTip from "./ItemToolTip";
+import "./ShopEntry.css";
 
 function getItemImage(itemName: string) {
   let itemImg = new Image();
@@ -16,6 +17,14 @@ function getPrettyItemName(itemID: string) {
     .map((w) => w[0].toUpperCase() + w.substring(1).toLowerCase())
     .join(" ");
   return itemName;
+}
+
+function getEnchantClass(item: ItemStack) {
+  if (item.enchantments === null) {
+    return "me-2 standard-item";
+  } else {
+    return "me-2 enchanted-item";
+  }
 }
 
 interface ShopEntryParameters {
@@ -42,7 +51,7 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
                 if (imageSrc !== fallbackSrc) setImageSrc(fallbackSrc);
               }}
               src={imageSrc}
-              className="img-fluid rounded me-2 shadow"
+              className={getEnchantClass(shopDetails.itemStack)}
               style={{ width: 80, imageRendering: "pixelated" }}
             />
           </ItemToolTip>
