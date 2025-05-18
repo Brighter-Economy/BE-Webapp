@@ -64,7 +64,7 @@ enableMocking().then(() => {
         },
         {
           path: "/players/:uuid",
-          element: <Test />,
+          Component: Test,
         },
       ],
     },

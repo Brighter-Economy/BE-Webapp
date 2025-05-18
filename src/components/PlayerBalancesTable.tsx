@@ -44,13 +44,19 @@ interface PlayerBalancesTableProps {
   isLocked: boolean;
 }
 
-const PlayerBalancesTable: React.FC<PlayerBalancesTableProps> = ({ searchQuery, isLocked }) => {
+const PlayerBalancesTable: React.FC<PlayerBalancesTableProps> = ({
+  searchQuery,
+  isLocked,
+}) => {
   const [playerAccounts, setPlayerAccounts] = useState<PlayerAccount[]>([]);
-  const [selectedPlayerAccount, setSelectedPlayerAccount] = useState<PlayerAccount>(emptyPlayerAccount);
+  const [selectedPlayerAccount, setSelectedPlayerAccount] =
+    useState<PlayerAccount>(emptyPlayerAccount);
   const [shouldShowModal, setShouldShowModal] = useState<boolean>(false);
 
   const updatePlayerAccounts = async () => {
-    const accountsJson = await fetch("/api/accounts").then((response) => response.json());
+    const accountsJson = await fetch("/api/accounts").then((response) =>
+      response.json()
+    );
     setPlayerAccounts(accountsJson);
   };
 
@@ -59,8 +65,10 @@ const PlayerBalancesTable: React.FC<PlayerBalancesTableProps> = ({ searchQuery, 
   }, []);
 
   const filteredPlayerAccounts = playerAccounts.filter((account) => {
-    const matchesSearch = account.username.toLowerCase().startsWith(searchQuery.toLowerCase());
-    const matchesLocked = isLocked ? account.locked : !account.locked;
+    const matchesSearch = account.username
+      .toLowerCase()
+      .startsWith(searchQuery.toLowerCase());
+    const matchesLocked = !isLocked || account.locked;
 
     return matchesSearch && matchesLocked;
   });
