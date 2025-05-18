@@ -54,7 +54,10 @@ function PlayerShops() {
         </div>
       </div>
       <div className="container w-100 d-flex">
-        <div className="d-flex mx-auto g-0" style={{ flexWrap: "wrap" }}>
+        <div
+          className="d-flex mx-auto g-0 justify-content-center"
+          style={{ flexWrap: "wrap" }}
+        >
           {filteredShops.map((shop) => (
             <ShopEntry key={shop.id} shopDetails={shop} />
           ))}
