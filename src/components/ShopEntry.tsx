@@ -3,21 +3,7 @@ import { ItemStack, ShopDetails } from "../components/types";
 import { Link } from "react-router-dom";
 import ItemToolTip from "./ItemToolTip";
 import "./ShopEntry.css";
-
-function getItemImage(itemName: string) {
-  let itemImg = new Image();
-  itemImg.src = "src/assets/item_images/" + itemName.replace(":", "_") + ".png";
-  return itemImg.src;
-}
-
-function getPrettyItemName(itemID: string) {
-  let itemName = itemID.split(":")[1];
-  itemName = itemName
-    .split("_")
-    .map((w) => w[0].toUpperCase() + w.substring(1).toLowerCase())
-    .join(" ");
-  return itemName;
-}
+import { getItemImage, getPrettyItemName } from "../utils";
 
 function getEnchantClass(item: ItemStack) {
   if (item.enchantments === null) {
@@ -36,7 +22,7 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
     getItemImage(shopDetails.itemStack.item)
   );
   const fallbackSrc = "src/assets/no_item_image.png";
-  const curPreflix = "$";
+  const currencyPreflix = "$";
 
   return (
     <div
@@ -64,7 +50,7 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
                 <strong>{shopDetails.ownerName}'s</strong>
               </h4>
             </Link>
-            <h4>{getPrettyItemName(shopDetails.itemStack.item)} Shop</h4>
+            <h4>{getPrettyItemName(shopDetails.itemStack)} Shop</h4>
           </div>
         </div>
         <div className="d-flex">
@@ -102,7 +88,7 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
                 placeholder={
                   shopDetails.itemStack.count +
                   " @ " +
-                  curPreflix +
+                  currencyPreflix +
                   shopDetails.price.toString()
                 }
               />

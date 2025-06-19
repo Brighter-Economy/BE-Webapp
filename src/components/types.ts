@@ -31,10 +31,16 @@ export interface Position {
 }
 
 export interface ItemStack {
+  customName: string | null;
   item: string;
   count: number;
-  enchantments: string[] | null;
+  enchantments: Enchantment[] | null;
   lore: string | null;
+}
+
+export interface Enchantment {
+  id: string;
+  level: number | null;
 }
 
 export interface ShopDetails {
