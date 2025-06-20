@@ -72,7 +72,7 @@ const DataRow: React.FC<DataRowParameters> = ({ transaction }) => {
 interface PlayerAccountModalParams {
   shouldShow: () => boolean;
   onClose: () => void;
-  playerAccount: () => PlayerAccount;
+  playerAccount: () => PlayerAccount | null;
 }
 
 const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
@@ -83,13 +83,17 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
   const navigate = useNavigate();
   const [transactions, setTransactions] = useState<Transaction[]>();
 
-  const { uuid, username, money, locked } = playerAccount();
+  const account = playerAccount();
 
   const updateTransactions = async () => {
-    const transactionsJson = await fetch(
-      "/api/transactions/" + uuid + "?limit=5&sort=desc"
-    ).then((response) => response.json());
-    setTransactions(transactionsJson);
+    if (account?.uuid) {
+      const transactionsJson = await fetch(
+        `/api/accounts/${account!!.uuid}/transactions?limit=5&sort=desc`
+      ).then((response) => response.json());
+      setTransactions(transactionsJson);
+    } else {
+      setTransactions([]);
+    }
   };
 
   const handleUUIDRedirect = (uuid: string) => {
@@ -106,7 +110,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
 
   useEffect(() => {
     updateTransactions();
-  }, [uuid]);
+  }, [account]);
 
   const TransactionRows = () =>
     transactions?.map((transaction) => (
@@ -127,21 +131,23 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
       className="modal-lg"
     >
       <Modal.Header closeButton>
-        <Modal.Title>{username}</Modal.Title>
+        <Modal.Title>{account?.username}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="rounded shadow d-flex">
           <div className="w-100 ms-2">
             <div className="d-flex">
               <img
-                src={"https://mc-heads.net/head/" + uuid}
+                src={"https://mc-heads.net/head/" + account?.uuid}
                 className="rounded pe-4"
               />
               <div className="my-auto">
                 <div
                   className="input-group mb-2"
                   onClick={() => {
-                    navigator.clipboard.writeText(uuid);
+                    if (account) {
+                      navigator.clipboard.writeText(account!!.uuid);
+                    }
                   }}
                 >
                   <span className="input-group-text">UUID</span>
@@ -149,7 +155,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                     type="input-group-text"
                     className="form-control"
                     disabled={true}
-                    placeholder={uuid}
+                    placeholder={account?.uuid}
                   />
                   <span className="input-group-text">
                     <i className="bi bi-clipboard2" />
@@ -158,7 +164,9 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                 <div
                   className="d-flex mb-2"
                   onClick={() => {
-                    navigator.clipboard.writeText(username);
+                    if (account) {
+                      navigator.clipboard.writeText(account!!.username);
+                    }
                   }}
                 >
                   <div className="input-group">
@@ -167,7 +175,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                       type="input-group-text"
                       className="form-control"
                       disabled={true}
-                      placeholder={username}
+                      placeholder={account?.username}
                     />
                     <span className="input-group-text">
                       <i className="bi bi-clipboard2" />
@@ -178,7 +186,11 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                   <div
                     className="input-group me-2"
                     onClick={() => {
-                      navigator.clipboard.writeText(money.toString());
+                      if (account) {
+                        navigator.clipboard.writeText(
+                          account!!.money.toString()
+                        );
+                      }
                     }}
                   >
                     <span className="input-group-text">Balance</span>
@@ -186,7 +198,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                       type="input-group-text"
                       className="form-control"
                       disabled={false}
-                      placeholder={money.toString()}
+                      placeholder={account?.money.toString()}
                     />
                     <span className="input-group-text">
                       <i className="bi bi-clipboard2" />
@@ -198,7 +210,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                         className="form-check-input mt-0"
                         type="checkbox"
                         value=""
-                        checked={locked}
+                        checked={account?.locked}
                       />
                     </div>
                     <input
@@ -213,7 +225,11 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                   <Button
                     variant="primary"
                     className="w-100"
-                    onClick={() => handleUUIDRedirect(uuid)}
+                    onClick={() => {
+                      if (account) {
+                        handleUUIDRedirect(account!!.uuid);
+                      }
+                    }}
                   >
                     Open Player Details
                   </Button>

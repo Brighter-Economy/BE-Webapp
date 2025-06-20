@@ -22,6 +22,25 @@ export const handlers = [
     );
   }),
 
+  http.get("/api/accounts/:uuid/transactions", async ({ request, params }) => {
+    const uuidParam = params.uuid;
+    const searchParams = new URL(request.url).searchParams;
+    const limitParam = searchParams.get("limit");
+    const sortParam = searchParams.get("sort");
+
+    let transactions = mockTransactionData.filter(
+      ({ uuidFrom, uuidTo }) => uuidParam === uuidFrom || uuidParam === uuidTo
+    );
+    transactions =
+      sortParam === "asc"
+        ? transactions.sort((t1, t2) => t1.timestamp - t2.timestamp)
+        : transactions.sort((t1, t2) => t2.timestamp - t1.timestamp);
+    if (limitParam) transactions = transactions.slice(0, Number(limitParam));
+
+    await delay();
+    return HttpResponse.json(transactions);
+  }),
+
   http.get("/api/transactions", async ({ request }) => {
     const searchParams = new URL(request.url).searchParams;
     const limitParam = searchParams.get("limit");

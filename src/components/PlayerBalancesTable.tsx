@@ -3,13 +3,6 @@ import BasicTable from "./BasicTable";
 import PlayerAccountModal from "./PlayerAccountModal";
 import { PlayerAccount } from "./types";
 
-const emptyPlayerAccount: PlayerAccount = {
-  uuid: "",
-  username: "",
-  locked: false,
-  money: 0,
-};
-
 interface DataRowParameters {
   playerAccount: PlayerAccount;
   onClick: () => void;
@@ -50,7 +43,7 @@ const PlayerBalancesTable: React.FC<PlayerBalancesTableProps> = ({
 }) => {
   const [playerAccounts, setPlayerAccounts] = useState<PlayerAccount[]>([]);
   const [selectedPlayerAccount, setSelectedPlayerAccount] =
-    useState<PlayerAccount>(emptyPlayerAccount);
+    useState<PlayerAccount | null>(null);
   const [shouldShowModal, setShouldShowModal] = useState<boolean>(false);
 
   const updatePlayerAccounts = async () => {
@@ -89,7 +82,10 @@ const PlayerBalancesTable: React.FC<PlayerBalancesTableProps> = ({
     <>
       <PlayerAccountModal
         shouldShow={() => shouldShowModal}
-        onClose={() => setShouldShowModal(false)}
+        onClose={() => {
+          setShouldShowModal(false);
+          setTimeout(() => setSelectedPlayerAccount(null), 150);
+        }}
         playerAccount={() => selectedPlayerAccount}
       />
       <BasicTable
