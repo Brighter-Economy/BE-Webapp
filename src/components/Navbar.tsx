@@ -1,6 +1,7 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import shopBlockIconUrl from "../assets/ShopBlockIcon.png";
 
 interface NavLinkParams {
   path: string;
@@ -42,7 +43,7 @@ function Navbar() {
       <nav className="navbar navbar-dark navbar-expand-sm rounded-bottom shadow bg-primary">
         <span onClick={handleLogoClick} className="navbar-brand m-0 h1">
           <img
-            src="src/assets/ShopBlockIcon_small.png"
+            src={shopBlockIconUrl}
             width="40"
             height="40"
             className="d-inline-block align-center ms-2 me-2"
