@@ -5,22 +5,17 @@ export interface PlayerAccount {
   money: number;
 }
 
-export interface ItemDetails {
-  item: string;
-  count: number;
-  nbt: string | null;
-}
-
 export interface Transaction {
   id: string;
   type: string;
+  shopId: string | null;
   participants: string;
   uuidFrom: string | null;
   uuidTo: string | null;
   nameFrom: string | null;
   nameTo: string | null;
   money: number;
-  itemPurchased: ItemDetails | null;
+  itemStack: ItemStack | null;
   timestamp: number;
 }
 
@@ -34,7 +29,7 @@ export interface ItemStack {
   customName: string | null;
   item: string;
   count: number;
-  enchantments: Enchantment[] | null;
+  enchantments: Enchantment[];
   lore: string | null;
 }
 

@@ -73,7 +73,7 @@ function Navbar() {
                 content={<i className="bi bi-gear" />}
               />
               <NavLink
-                path="https://github.com/Brighter-Economy/BrighterEconomy"
+                path="https://github.com/Brighter-Economy"
                 content={<i className="bi bi-github" />}
               />
             </ul>

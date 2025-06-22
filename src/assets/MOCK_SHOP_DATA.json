@@ -13,7 +13,7 @@
       "customName": null,
       "item": "minecraft:diamond",
       "count": 1,
-      "enchantments": null,
+      "enchantments": [],
       "lore": null
     },
     "price": 50
@@ -51,7 +51,10 @@
       "customName": "McSwordyFace",
       "item": "minecraft:diamond_sword",
       "count": 1,
-      "enchantments": [{ "id": "minecraft:unbreaking", "level": 1 },{ "id": "minecraft:sharpness", "level": 3 }],
+      "enchantments": [
+        { "id": "minecraft:unbreaking", "level": 1 },
+        { "id": "minecraft:sharpness", "level": 3 }
+      ],
       "lore": null
     },
     "price": 80
@@ -70,7 +73,7 @@
       "customName": null,
       "item": "minecraft:netherrack",
       "count": 64,
-      "enchantments": null,
+      "enchantments": [],
       "lore": null
     },
     "price": 5
@@ -108,7 +111,7 @@
       "customName": null,
       "item": "minecraft:golden_carrot",
       "count": 64,
-      "enchantments": null,
+      "enchantments": [],
       "lore": null
     },
     "price": 180
@@ -127,7 +130,10 @@
       "customName": null,
       "item": "minecraft:diamond_helmet",
       "count": 1,
-      "enchantments": [{ "id": "minecraft:unbreaking", "level": 3 },{ "id": "minecraft:protection", "level": 4 }],
+      "enchantments": [
+        { "id": "minecraft:unbreaking", "level": 3 },
+        { "id": "minecraft:protection", "level": 4 }
+      ],
       "lore": "I buy my armor at JonJon's Armor Emporium!"
     },
     "price": 220
@@ -146,7 +152,10 @@
       "customName": null,
       "item": "minecraft:diamond_chestplate",
       "count": 1,
-      "enchantments": [{ "id": "minecraft:unbreaking", "level": 3 },{ "id": "minecraft:protection", "level": 4 }],
+      "enchantments": [
+        { "id": "minecraft:unbreaking", "level": 3 },
+        { "id": "minecraft:protection", "level": 4 }
+      ],
       "lore": "I buy my armor at JonJon's Armor Emporium!"
     },
     "price": 280
@@ -165,7 +174,10 @@
       "customName": null,
       "item": "minecraft:diamond_leggings",
       "count": 1,
-      "enchantments": [{ "id": "minecraft:unbreaking", "level": 3 },{ "id": "minecraft:protection", "level": 4 }],
+      "enchantments": [
+        { "id": "minecraft:unbreaking", "level": 3 },
+        { "id": "minecraft:protection", "level": 4 }
+      ],
       "lore": "I buy my armor at JonJon's Armor Emporium!"
     },
     "price": 250
@@ -184,7 +196,10 @@
       "customName": null,
       "item": "minecraft:diamond_boots",
       "count": 1,
-      "enchantments": [{ "id": "minecraft:unbreaking", "level": 3 },{ "id": "minecraft:protection", "level": 4 }],
+      "enchantments": [
+        { "id": "minecraft:unbreaking", "level": 3 },
+        { "id": "minecraft:protection", "level": 4 }
+      ],
       "lore": "I buy my armor at JonJon's Armor Emporium!"
     },
     "price": 200
@@ -203,7 +218,7 @@
       "customName": null,
       "item": "minecraft:netherite_scrap",
       "count": 1,
-      "enchantments": null,
+      "enchantments": [],
       "lore": null
     },
     "price": 250
@@ -222,7 +237,7 @@
       "customName": null,
       "item": "minecraft:saddle",
       "count": 1,
-      "enchantments": null,
+      "enchantments": [],
       "lore": null
     },
     "price": 40
