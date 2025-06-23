@@ -80,12 +80,10 @@ export const handlers = [
     const itemParam = params.item;
 
     if (itemParam) {
-      let item = mockShopData.find((item) => {
-        return item.ownerUuid === itemParam;
-      });
+      const itemsArray = mockShopData.filter(item => item.ownerUuid === itemParam);
 
       await delay();
-      return HttpResponse.json(item);
+      return HttpResponse.json(itemsArray);
     }
 
     await delay();
