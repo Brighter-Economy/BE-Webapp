@@ -47,8 +47,9 @@ const DataRow: React.FC<DataRowParameters> = ({ transaction }) => {
           <TypeDisplay typeName={transaction.type} />
         </td>
         <td>{new Date(transaction.timestamp * 1000).toLocaleString()}</td>
-        <td>{transaction.nameTo}</td>
         <td>{transaction.nameFrom}</td>
+        <td>{transaction.nameTo}</td>
+
         <td>{transaction.money}</td>
       </tr>
     );
@@ -242,7 +243,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
               </h5>
             </div>
             <BasicTable
-              headers={["Type", "Timestamp", "To", "From", "Amount"]}
+              headers={["Type", "Timestamp", "From", "To", "Amount"]}
               rows={TransactionRows()}
             />
           </div>
