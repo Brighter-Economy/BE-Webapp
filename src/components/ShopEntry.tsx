@@ -4,14 +4,7 @@ import { Link } from "react-router-dom";
 import ItemToolTip from "./ItemToolTip";
 import "./ShopEntry.css";
 import { getItemImage, getPrettyItemName } from "../utils";
-
-function getEnchantClass(item: ItemStack) {
-  if (item.enchantments === null) {
-    return "me-2 standard-item";
-  } else {
-    return "me-2 enchanted-item";
-  }
-}
+import glintImage from "../assets/glint.png";
 
 interface ShopEntryParameters {
   shopDetails: ShopDetails;
@@ -24,6 +17,13 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
   const fallbackSrc = "src/assets/no_item_image.png";
   const currencyPreflix = "$";
 
+  const glintEffect = () =>
+    shopDetails.itemStack.enchantments.length > 0 && (
+      <div className="item-mask" style={{ maskImage: `url("${imageSrc}")` }}>
+        <img src={glintImage} className="glint" />
+      </div>
+    );
+
   return (
     <div
       className="bg-secondary m-3 shadow rounded-2 flex"
@@ -33,13 +33,13 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
         <div className="d-flex mb-3">
           <ItemToolTip itemStack={shopDetails.itemStack}>
             <img
-              onError={() => {
-                if (imageSrc !== fallbackSrc) setImageSrc(fallbackSrc);
-              }}
+              onError={() =>
+                imageSrc !== fallbackSrc && setImageSrc(fallbackSrc)
+              }
               src={imageSrc}
-              className={getEnchantClass(shopDetails.itemStack)}
-              style={{ width: 80, imageRendering: "pixelated" }}
+              className="me-2 standard-item"
             />
+            {glintEffect()}
           </ItemToolTip>
           <div className="m-2 text-start my-auto">
             <Link

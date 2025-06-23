@@ -1,7 +1,31 @@
-.enchanted-item {
-    filter: drop-shadow(0px 0px 4px rgba(225, 225, 225, 0.525));
+.standard-item {
+  filter: drop-shadow(2px 2px 4px #000000be);
+  width: 80px;
+  image-rendering: pixelated;
 }
 
-.standard-item {
-    filter: drop-shadow(2px 2px 4px #000000be)
+.item-mask {
+  mask-repeat: no-repeat;
+  mask-mode: alpha;
+  mask-size: 80px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  image-rendering: pixelated;
+  filter: brightness(0.4);
+  mix-blend-mode: plus-lighter;
+}
+
+.glint {
+  scale: 150%;
+  animation: 4s linear infinite normal glint-anim;
+}
+
+@keyframes glint-anim {
+  from {
+    transform: translate(-50%, -20%);
+  }
+  to {
+    transform: translate(0%, -20%);
+  }
 }

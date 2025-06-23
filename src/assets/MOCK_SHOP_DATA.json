@@ -92,7 +92,7 @@
       "customName": null,
       "item": "minecraft:diamond",
       "count": 2,
-      "enchantments": null,
+      "enchantments": [],
       "lore": null
     },
     "price": 70
