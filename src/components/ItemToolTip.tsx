@@ -17,11 +17,11 @@ const ItemToolTip: React.FC<PropsWithChildren<ItemToolTipProperties>> = ({
       <div className="ItemToolTip">
         <h5 className="mc-font-title">{getPrettyItemName(itemStack)}</h5>
         {itemStack.enchantments?.map((enchant) => (
-          <div className="mc-font-secondary">
+          <div className="mc-font-secondary" key={enchant.id}>
             {getPrettyEnchantName(enchant)}
           </div>
         ))}
-        <body className="mc-font-lore">{itemStack.lore}</body>
+        <p className="mc-font-lore">{itemStack.lore}</p>
         <div className="mc-font-registry-name">{itemStack.item}</div>
       </div>
     </div>

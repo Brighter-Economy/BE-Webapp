@@ -62,7 +62,7 @@ function ShopEntries() {
         <>
             <div className="pt-3 ps-3 pe-3 d-flex flex-column">
                 {shopData ? (
-                    <div className="shop-entry mb-3">
+                    <div className="shop-entry mb-3" key={shopData.id}>
                         <h2>{shopData.ownerName}'s Shop</h2>
                         <p>Owner UUID: {shopData.ownerUuid}</p>
                         <p>Dimension: {shopData.dimension}</p>
