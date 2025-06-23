@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //pages
 import TestPage from "./pages/TestPage.tsx";
-import Test from "./pages/Test.tsx";
+import ShopEntries from "./pages/ShopEntries.tsx";
 import Auctions from "./pages/Auctions.tsx";
 import Items from "./pages/Items.tsx";
 import PlayerBalances from "./pages/PlayerBalances.tsx";
@@ -64,7 +64,7 @@ enableMocking().then(() => {
         },
         {
           path: "/players/:uuid",
-          Component: Test,
+          Component: ShopEntries,
         },
       ],
     },

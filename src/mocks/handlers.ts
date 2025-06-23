@@ -76,7 +76,18 @@ export const handlers = [
     return HttpResponse.json(transactions);
   }),
 
-  http.get("/api/shops", async () => {
+  http.get("/api/shops/:item?", async ({ params }) => {
+    const itemParam = params.item;
+
+    if (itemParam) {
+      let item = mockShopData.find((item) => {
+        return item.ownerUuid === itemParam;
+      });
+
+      await delay();
+      return HttpResponse.json(item);
+    }
+
     await delay();
     return HttpResponse.json(mockShopData);
   }),
