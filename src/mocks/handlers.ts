@@ -10,6 +10,7 @@ export const handlers = [
 
   http.get("/api/accounts/:uuid", ({ params }) => {
     const uuidParam = params.uuid;
+
     return HttpResponse.json(
       mockPlayerData.find(({ uuid }) => uuid === uuidParam)
     );
@@ -76,7 +77,7 @@ export const handlers = [
     return HttpResponse.json(transactions);
   }),
 
-  http.get("/api/shops", async ({ params }) => {
+  http.get("/api/shops", async () => {
     await delay();
     return HttpResponse.json(mockShopData);
   }),

@@ -11,15 +11,34 @@ function ShopEntries() {
     const [shopData, setShopData] = useState<ShopDetails[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [accountInfo, setAccountInfo] = useState<{ ownerName: string; uuid: string } | null>(null);
 
     const getItem = async (pathname: string) => {
         try {
-            const response = await fetch(`/api/shops/${pathname}`);
+            const response = await fetch(`/api/shops`);
             if (!response.ok) {
                 throw new Error('An Error Occurred.');
             }
             const shopsJson = await response.json();
-            return shopsJson;
+            const filteredShops = shopsJson.filter((shop: ShopDetails) => shop.ownerUuid === pathname);
+
+            return filteredShops;
+        } catch (err: any) {
+            setError(err.message);
+            return null;
+        }
+    };
+
+    const getAccountInfo = async (uuid: string) => {
+        try {
+            const response = await fetch(`/api/accounts/${uuid}`);
+
+            if (!response.ok) {
+                throw new Error('An Error Occurred.');
+            }
+
+            const accountJson = await response.json();
+            return accountJson;
         } catch (err: any) {
             setError(err.message);
             return null;
@@ -35,6 +54,21 @@ function ShopEntries() {
 
         fetchData();
     }, [pathname]);
+
+    useEffect(() => {
+        const fetchAccountInfo = async () => {
+            if (shopData.length > 0) {
+                const account = await getAccountInfo(shopData[0].ownerUuid);
+                if (account) {
+                    setAccountInfo(account);
+                } else {
+                    setAccountInfo({ ownerName: 'Unknown', uuid: 'Unknown' });
+                }
+            }
+        };
+
+        fetchAccountInfo();
+    }, [shopData]);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -58,13 +92,18 @@ function ShopEntries() {
     return (
         <>
             <div className="pt-3 ps-3 pe-3 d-flex flex-column">
+                {accountInfo && (
+                    <>
+                        <h2>{accountInfo?.ownerName}'s Shop</h2>
+                        <p>UUID: {accountInfo?.uuid}</p>
+                    </>
+                )}
+
                 {shopData.map((item) => {
                     const imageSrc = getItemImage(item.itemStack.item);
 
                     return (
                         <div className="shop-entry mb-3" key={item.id}>
-                            <h2>{item.ownerName}'s Shop</h2>
-                            <p>Owner UUID: {item.ownerUuid}</p>
                             <p>Dimension: {item.dimension}</p>
                             <p>Position: {`(${item.position.x}, ${item.position.y}, ${item.position.z})`}</p>
                             <p>Item Stack: {JSON.stringify(item.itemStack)}</p>
