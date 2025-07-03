@@ -4,7 +4,7 @@ import ItemToolTip from '../components/ItemToolTip';
 import { getItemImage } from '../utils';
 import glintImage from "../assets/glint.png";
 
-function ShopEntries() {
+function PlayerDetails() {
     const pathname = window.location.pathname.replace(/\/players\//, '');
     const fallbackSrc = "src/assets/no_item_image.png";
 
@@ -168,7 +168,7 @@ function ShopEntries() {
                         </div>
 
                         <div className="input-group mb-2" style={{ width: '57.5%' }}>
-                            <span className="input-group-text">Custom Lore</span>
+                            <span className="input-group-text">Price</span>
                             <input
                                 type="text"
                                 className="form-control"
@@ -197,4 +197,4 @@ function ShopEntries() {
     );
 }
 
-export default ShopEntries;
+export default PlayerDetails;

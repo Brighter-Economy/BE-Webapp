@@ -5,8 +5,8 @@ import App from "./App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 //pages
-import TestPage from "./pages/TestPage.tsx";
-import ShopEntries from "./pages/ShopEntries.tsx";
+import HomePage from "./pages/HomePage.tsx";
+import PlayerDetails from "./pages/PlayerDetails.tsx";
 import Auctions from "./pages/Auctions.tsx";
 import Items from "./pages/Items.tsx";
 import PlayerBalances from "./pages/PlayerBalances.tsx";
@@ -32,7 +32,7 @@ enableMocking().then(() => {
       children: [
         {
           path: "/",
-          element: <TestPage />,
+          element: <HomePage />,
         },
         {
           path: "/login",
@@ -64,7 +64,7 @@ enableMocking().then(() => {
         },
         {
           path: "/players/:uuid",
-          Component: ShopEntries,
+          Component: PlayerDetails,
         },
       ],
     },
