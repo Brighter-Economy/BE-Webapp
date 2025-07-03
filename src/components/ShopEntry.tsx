@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ItemStack, ShopDetails } from "../components/types";
+import { ShopDetails } from "../components/types";
 import { Link } from "react-router-dom";
 import ItemToolTip from "./ItemToolTip";
 import "./ShopEntry.css";
@@ -58,7 +58,6 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
             <div
               className="input-group mb-1"
               onClick={() => navigator.clipboard.writeText(shopDetails.id)}
-
             >
               <span className="input-group-text">Shop ID:</span>
               <input
@@ -66,7 +65,6 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
                 className="form-control"
                 disabled={true}
                 placeholder={shopDetails.id}
-
               />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
@@ -77,8 +75,8 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
               onClick={() =>
                 navigator.clipboard.writeText(
                   shopDetails.itemStack.count.toString() +
-                  "@" +
-                  shopDetails.price
+                    "@" +
+                    shopDetails.price
                 )
               }
             >
@@ -93,7 +91,6 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
                   currencyPreflix +
                   shopDetails.price.toString()
                 }
-
               />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
@@ -104,7 +101,6 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
               onClick={() =>
                 navigator.clipboard.writeText(shopDetails.itemStack.item)
               }
-
             >
               <span className="input-group-text">Item:</span>
               <input
@@ -112,7 +108,6 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
                 className="form-control"
                 disabled={true}
                 placeholder={shopDetails.itemStack.item}
-
               />
               <span className="input-group-text">
                 <i className="bi bi-clipboard2" />
