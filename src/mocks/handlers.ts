@@ -77,8 +77,15 @@ export const handlers = [
     return HttpResponse.json(transactions);
   }),
 
-  http.get("/api/shops", async () => {
+  http.get("/api/shops", async ({ request }) => {
+    const searchParams = new URL(request.url).searchParams;
+    const itemId = searchParams.get("itemId");
+
+    let shops = mockShopData;
+    if (itemId)
+      shops = shops.filter(({ itemStack }) => itemStack.item == itemId);
+
     await delay();
-    return HttpResponse.json(mockShopData);
+    return HttpResponse.json(shops);
   }),
 ];
