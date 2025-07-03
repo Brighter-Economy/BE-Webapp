@@ -10,6 +10,7 @@
       "z": 2
     },
     "itemStack": {
+      "name": "Diamond",
       "customName": null,
       "item": "minecraft:diamond",
       "count": 1,
@@ -29,10 +30,13 @@
       "z": 9
     },
     "itemStack": {
+      "name": "Enchanted Book",
       "customName": null,
       "item": "minecraft:enchanted_book",
       "count": 1,
-      "enchantments": [{ "id": "minecraft:mending", "level": null }],
+      "enchantments": [
+        { "id": "minecraft:mending", "level": null, "name": "Mending" }
+      ],
       "lore": null
     },
     "price": 250
@@ -48,12 +52,13 @@
       "z": 3
     },
     "itemStack": {
+      "name": "Diamond Sword",
       "customName": "McSwordyFace",
       "item": "minecraft:diamond_sword",
       "count": 1,
       "enchantments": [
-        { "id": "minecraft:unbreaking", "level": 1 },
-        { "id": "minecraft:sharpness", "level": 3 }
+        { "id": "minecraft:unbreaking", "level": 1, "name": "Unbreaking" },
+        { "id": "minecraft:sharpness", "level": 3, "name": "Sharpness" }
       ],
       "lore": null
     },
@@ -70,6 +75,7 @@
       "z": 412
     },
     "itemStack": {
+      "name": "Netherrack",
       "customName": null,
       "item": "minecraft:netherrack",
       "count": 64,
@@ -89,6 +95,7 @@
       "z": -1244
     },
     "itemStack": {
+      "name": "Diamond",
       "customName": null,
       "item": "minecraft:diamond",
       "count": 2,
@@ -108,6 +115,7 @@
       "z": -538
     },
     "itemStack": {
+      "name": "Golden Carrot",
       "customName": null,
       "item": "minecraft:golden_carrot",
       "count": 64,
@@ -127,12 +135,13 @@
       "z": 1923
     },
     "itemStack": {
+      "name": "Diamond Helmet",
       "customName": null,
       "item": "minecraft:diamond_helmet",
       "count": 1,
       "enchantments": [
-        { "id": "minecraft:unbreaking", "level": 3 },
-        { "id": "minecraft:protection", "level": 4 }
+        { "id": "minecraft:unbreaking", "level": 3, "name": "Unbreaking" },
+        { "id": "minecraft:protection", "level": 4, "name": "Protection" }
       ],
       "lore": "I buy my armor at JonJon's Armor Emporium!"
     },
@@ -149,12 +158,13 @@
       "z": 193
     },
     "itemStack": {
+      "name": "Diamond Chestplate",
       "customName": null,
       "item": "minecraft:diamond_chestplate",
       "count": 1,
       "enchantments": [
-        { "id": "minecraft:unbreaking", "level": 3 },
-        { "id": "minecraft:protection", "level": 4 }
+        { "id": "minecraft:unbreaking", "level": 3, "name": "Unbreaking" },
+        { "id": "minecraft:protection", "level": 4, "name": "Protection" }
       ],
       "lore": "I buy my armor at JonJon's Armor Emporium!"
     },
@@ -171,12 +181,13 @@
       "z": 6
     },
     "itemStack": {
+      "name": "Diamond Leggings",
       "customName": null,
       "item": "minecraft:diamond_leggings",
       "count": 1,
       "enchantments": [
-        { "id": "minecraft:unbreaking", "level": 3 },
-        { "id": "minecraft:protection", "level": 4 }
+        { "id": "minecraft:unbreaking", "level": 3, "name": "Unbreaking" },
+        { "id": "minecraft:protection", "level": 4, "name": "Protection" }
       ],
       "lore": "I buy my armor at JonJon's Armor Emporium!"
     },
@@ -193,12 +204,13 @@
       "z": 280
     },
     "itemStack": {
+      "name": "Diamond Boots",
       "customName": null,
       "item": "minecraft:diamond_boots",
       "count": 1,
       "enchantments": [
-        { "id": "minecraft:unbreaking", "level": 3 },
-        { "id": "minecraft:protection", "level": 4 }
+        { "id": "minecraft:unbreaking", "level": 3, "name": "Unbreaking" },
+        { "id": "minecraft:protection", "level": 4, "name": "Protection" }
       ],
       "lore": "I buy my armor at JonJon's Armor Emporium!"
     },
@@ -215,6 +227,7 @@
       "z": 9
     },
     "itemStack": {
+      "name": "Netherite Scrap",
       "customName": null,
       "item": "minecraft:netherite_scrap",
       "count": 1,
@@ -234,6 +247,7 @@
       "z": 2073
     },
     "itemStack": {
+      "name": "Saddle",
       "customName": null,
       "item": "minecraft:saddle",
       "count": 1,

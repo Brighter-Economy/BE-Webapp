@@ -26,6 +26,7 @@ export interface Position {
 }
 
 export interface ItemStack {
+  name: string | null;
   customName: string | null;
   item: string;
   count: number;
@@ -34,6 +35,7 @@ export interface ItemStack {
 }
 
 export interface Enchantment {
+  name: string | null;
   id: string;
   level: number | null;
 }

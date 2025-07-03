@@ -13,14 +13,19 @@ export function getPrettyItemName(itemStack: ItemStack) {
     if (itemStack.customName) {
         return itemStack.customName;
     }
+    else if (itemStack.name) {
+        return itemStack.name;
+    }
     return idFormat(itemStack.item);
+    
 }
 
 export function getPrettyEnchantName(enchant: Enchantment) {
+    const name = enchant.name ? enchant.name : idFormat(enchant.id);
     if (enchant.level) {
-        return idFormat(enchant.id) + " " + enchant.level;
+        return name + " " + enchant.level;
     }
-    return idFormat(enchant.id);
+    return name;
 }
 
 export function getItemImage(itemName: string) {
