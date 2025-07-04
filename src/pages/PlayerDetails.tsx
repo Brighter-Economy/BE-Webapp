@@ -122,7 +122,7 @@ function PlayerDetails() {
                     <select id="shopSelect" className="form-select" onChange={handleShopChange}>
                         {shopData.map((item) => (
                             <option key={item.id} value={item.id}>
-                                {item.itemStack.item} - {item.price.toFixed(2)}$
+                                {item.itemStack.item} - ${item.price.toFixed(2)}
                             </option>
                         ))}
                     </select>
