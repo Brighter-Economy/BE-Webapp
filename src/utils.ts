@@ -29,7 +29,5 @@ export function getPrettyEnchantName(enchant: Enchantment) {
 }
 
 export function getItemImage(itemName: string) {
-    let itemImg = new Image();
-    itemImg.src = "/src/assets/item_images/" + itemName.replace(":", "_") + ".png";
-    return itemImg.src;
+    return "/src/assets/item_images/" + itemName.replace(":", "_") + ".png";
 }
