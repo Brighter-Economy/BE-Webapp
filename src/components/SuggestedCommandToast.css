@@ -1,0 +1,8 @@
+.toast-img {
+    width: 30px;
+    border-radius: 10%;
+}
+.toast-header {
+    background-color: red;
+    filter: saturate(50%)
+}
