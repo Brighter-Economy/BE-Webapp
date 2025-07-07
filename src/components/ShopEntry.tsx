@@ -54,7 +54,7 @@ const ShopEntry: React.FC<ShopEntryParameters> = ({ shopDetails }) => {
           </div>
         </div>
         <div className="d-flex">
-          <div>
+          <div style={{ width: "100%" }}>
             <div
               className="input-group mb-1"
               onClick={() => navigator.clipboard.writeText(shopDetails.id)}
