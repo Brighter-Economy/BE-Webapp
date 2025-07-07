@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { PlayerAccount, Transaction } from "./types";
 import BasicTable from "./BasicTable";
 import ErrorPage from "../pages/ErrorPage";
+import CopyButton, { BaseComponent } from "./CopyButton";
 
 interface DataRowParameters {
   transaction: Transaction;
@@ -123,6 +124,18 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
     setTransactions(undefined);
   };
 
+  const CopyButtonBase: BaseComponent = ({ children, onClick }) => (
+    <span className="input-group-text" onClick={onClick}>
+      {children}
+    </span>
+  );
+
+  const copyAccountValue = (valueGetter: (acc: PlayerAccount) => string) => {
+    if (account) {
+      navigator.clipboard.writeText(valueGetter(account!!));
+    }
+  };
+
   return (
     <Modal
       show={shouldShow()}
@@ -145,11 +158,7 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
               <div className="my-auto">
                 <div
                   className="input-group mb-2"
-                  onClick={() => {
-                    if (account) {
-                      navigator.clipboard.writeText(account!!.uuid);
-                    }
-                  }}
+                  onClick={() => copyAccountValue((acc) => acc.uuid)}
                 >
                   <span className="input-group-text">UUID</span>
                   <input
@@ -158,17 +167,11 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                     disabled={true}
                     placeholder={account?.uuid}
                   />
-                  <span className="input-group-text">
-                    <i className="bi bi-clipboard2" />
-                  </span>
+                  <CopyButton baseComponent={(args) => CopyButtonBase(args)} />
                 </div>
                 <div
                   className="d-flex mb-2"
-                  onClick={() => {
-                    if (account) {
-                      navigator.clipboard.writeText(account!!.username);
-                    }
-                  }}
+                  onClick={() => copyAccountValue((acc) => acc.username)}
                 >
                   <div className="input-group">
                     <span className="input-group-text">Username</span>
@@ -178,21 +181,17 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                       disabled={true}
                       placeholder={account?.username}
                     />
-                    <span className="input-group-text">
-                      <i className="bi bi-clipboard2" />
-                    </span>
+                    <CopyButton
+                      baseComponent={(args) => CopyButtonBase(args)}
+                    />
                   </div>
                 </div>
                 <div className="d-flex mb-2">
                   <div
                     className="input-group me-2"
-                    onClick={() => {
-                      if (account) {
-                        navigator.clipboard.writeText(
-                          account!!.money.toString()
-                        );
-                      }
-                    }}
+                    onClick={() =>
+                      copyAccountValue((acc) => acc.money.toString())
+                    }
                   >
                     <span className="input-group-text">Balance</span>
                     <input
@@ -201,9 +200,9 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
                       disabled={false}
                       placeholder={account?.money.toString()}
                     />
-                    <span className="input-group-text">
-                      <i className="bi bi-clipboard2" />
-                    </span>
+                    <CopyButton
+                      baseComponent={(args) => CopyButtonBase(args)}
+                    />
                   </div>
                   <div className="input-group">
                     <div className="input-group-text">
