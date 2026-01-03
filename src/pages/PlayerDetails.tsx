@@ -4,6 +4,7 @@ import ItemToolTip from "../components/ItemToolTip";
 import { getItemImage } from "../utils";
 import glintImage from "../assets/glint.png";
 import "./PlayerDetails.css";
+import { get } from "../request";
 
 function PlayerDetails() {
   const pathname = window.location.pathname.replace(/\/players\//, "");
@@ -20,11 +21,7 @@ function PlayerDetails() {
 
   const getItem = async (pathname: string) => {
     try {
-      const response = await fetch(`/api/shops`);
-      if (!response.ok) {
-        throw new Error("An Error Occurred.");
-      }
-      const shopsJson = await response.json();
+      const shopsJson = await get("/api/shops", (response) => response.json());
       const filteredShops = shopsJson.filter(
         (shop: ShopDetails) => shop.ownerUuid === pathname
       );
@@ -37,20 +34,8 @@ function PlayerDetails() {
     }
   };
 
-  const getAccountInfo = async (uuid: string) => {
-    try {
-      const response = await fetch(`/api/accounts/${uuid}`);
-      if (!response.ok) {
-        throw new Error("An Error Occurred.");
-      }
-      const accountJson = await response.json();
-      return accountJson;
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      setError(err.message);
-      return null;
-    }
-  };
+  const getAccountInfo = async (uuid: string) =>
+    await get(`/api/accounts/${uuid}`, (response) => response.json());
 
   useEffect(() => {
     const fetchData = async () => {

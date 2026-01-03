@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import BasicTable from "./BasicTable";
 import PlayerAccountModal from "./PlayerAccountModal";
 import { PlayerAccount } from "./types";
+import { get } from "../request";
 
 interface DataRowParameters {
   playerAccount: PlayerAccount;
@@ -47,7 +48,7 @@ const PlayerBalancesTable: React.FC<PlayerBalancesTableProps> = ({
   const [shouldShowModal, setShouldShowModal] = useState<boolean>(false);
 
   const updatePlayerAccounts = async () => {
-    const accountsJson = await fetch("/api/accounts").then((response) =>
+    const accountsJson = await get("/api/accounts", (response) =>
       response.json()
     );
     setPlayerAccounts(accountsJson);

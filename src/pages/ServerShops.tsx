@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { ShopDetails } from "../components/types";
 import ShopEntry from "../components/ShopEntry";
+import { get } from "../request";
 
 function PlayerShops() {
   const [searchQuery, setSearchQuery] = useState("");
   const [shopDetails, setShopDetails] = useState<ShopDetails[]>([]);
 
   const updateShopDetails = async () => {
-    const shopsJson = await fetch("/api/shops").then((response) =>
-      response.json()
-    );
+    const shopsJson = await get("/api/shops", (response) => response.json());
     setShopDetails(shopsJson);
   };
 

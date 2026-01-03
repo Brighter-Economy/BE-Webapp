@@ -4,8 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import { useNavigate } from "react-router-dom";
 import { PlayerAccount, Transaction } from "./types";
 import BasicTable from "./BasicTable";
-import ErrorPage from "../pages/ErrorPage";
 import CopyButton, { BaseComponent } from "./CopyButton";
+import { get } from "../request";
 
 interface DataRowParameters {
   transaction: Transaction;
@@ -89,9 +89,10 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
 
   const updateTransactions = async () => {
     if (account?.uuid) {
-      const transactionsJson = await fetch(
-        `/api/accounts/${account!!.uuid}/transactions?limit=5&sort=desc`
-      ).then((response) => response.json());
+      const transactionsJson = await get(
+        `/api/accounts/${account!!.uuid}/transactions?limit=5&sort=desc`,
+        (response) => response.json()
+      );
       setTransactions(transactionsJson);
     } else {
       setTransactions([]);
@@ -99,15 +100,10 @@ const PlayerAccountModal: React.FC<PlayerAccountModalParams> = ({
   };
 
   const handleUUIDRedirect = (uuid: string) => {
-    fetch("/api/accounts/" + uuid)
-      .catch((err) => {
-        console.log(err);
-        return <ErrorPage />;
-      })
-      .then((response) => {
-        console.log(response);
-        navigate("/players/" + uuid);
-      });
+    get("/api/accounts/" + uuid, (response) => {
+      console.log(response);
+      navigate("/players/" + uuid);
+    });
   };
 
   useEffect(() => {
