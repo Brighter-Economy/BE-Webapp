@@ -32,6 +32,10 @@ enableMocking().then(() => {
       children: [
         {
           path: "/",
+          element: <LoginPage />,
+        },
+        {
+          path: "/home",
           element: <HomePage />,
         },
         {

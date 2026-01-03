@@ -1,7 +1,15 @@
+import { useState } from "react";
 import { Button } from "react-bootstrap";
+import { get } from "../request";
+import { useToasts } from "react-bootstrap-toasts";
+import { UserAuthInfo } from "../components/types";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const serverIp: string = "smp.example.net";
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <>
       <div className="flex-row align-items-center mt-5">
@@ -26,6 +34,9 @@ function LoginPage() {
               placeholder="Minecraft Username"
               aria-label="Username"
               aria-describedby="basic-addon1"
+              required
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
           <div>
@@ -39,16 +50,57 @@ function LoginPage() {
                 placeholder="BrighterEconomy Password"
                 aria-label="Password"
                 aria-describedby="basic-addon2"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="">
-              <Button className="btn-lg w-100 mb-3">Login</Button>
+              <Button
+                className="btn-lg w-100 mb-3"
+                onClick={() => auth(username, password)}
+              >
+                Login
+              </Button>
             </div>
           </div>
         </div>
       </div>
     </>
   );
+}
+
+async function auth(username: string, password: string) {
+  const navigate = useNavigate();
+  const toasts = useToasts();
+  //Login Logic here
+  let authString: string = Buffer.from(username + "=" + password).toString(
+    "base64"
+  );
+  localStorage.setItem("user", authString);
+
+  let r = await get("/user-info", (response) => response.json());
+  if (!r) {
+    toasts.show({
+      headerContent: "Incorrect Username or Password",
+      bodyContent:
+        "Make sure you're using the correct username and set your password in game",
+      toastProps: {
+        bg: "warning",
+      },
+    });
+    localStorage.removeItem("user");
+  } else
+    switch (r.type) {
+      case "PLAYER":
+        navigate(`/players/${r.uuid}`);
+        break;
+      case "ADMIN":
+        navigate("/players");
+        break;
+    }
+  console.log(username + ": " + password);
+  console.log(authString);
 }
 
 export default LoginPage;
