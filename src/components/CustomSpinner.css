@@ -1,0 +1,17 @@
+.spinner {
+  image-rendering: pixelated;
+  height: 120px;
+  width: 120px;
+  animation: spin 1.6s ease infinite;
+}
+
+@keyframes spin {
+  from {
+    transform-origin: 53% 53%;
+    transform: rotate(-45deg);
+  }
+  to {
+    transform-origin: 53% 53%;
+    transform: rotate(315deg);
+  }
+}
