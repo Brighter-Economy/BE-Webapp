@@ -4,13 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "react-router dev",
+    "build": "tsc -b && react-router build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.2",
+    "@react-router/node": "^7.11.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "buffer": "^6.0.3",
@@ -18,10 +19,12 @@
     "react-bootstrap": "^2.10.7",
     "react-bootstrap-toasts": "^0.2.0",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^7.1.1"
+    "react-router": "^7.11.0",
+    "isbot": "^5"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@react-router/dev": "^7.11.0",
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",

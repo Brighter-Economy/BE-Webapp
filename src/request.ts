@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { useToasts } from "react-bootstrap-toasts";
+import { useNavigate } from "react-router";
 
-export function get<T>(
+export async function get<T>(
   url: string,
   onSuccess: (response: Response) => T
 ): Promise<T | undefined> {
@@ -34,13 +35,21 @@ function handleErrors(response: Response | undefined) {
     return;
   }
   const navigate = useNavigate();
+  const toast = useToasts();
   const code = response.status;
   switch (code) {
     case 401: // Not authorized
+      localStorage.removeItem("user");
       navigate("/login");
-      // TODO: Display toast with not authenticated
+      toast.danger({
+        headerContent: "Error",
+        bodyContent: "You are not authenticated, please log in",
+      });
       break;
     case 403: // No permission
-    // TODO: Display toast with permission error
+      toast.warning({
+        headerContent: "Warning",
+        bodyContent: "You do not have permission to do that",
+      });
   }
 }

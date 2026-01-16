@@ -2,8 +2,8 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 import { get } from "../request";
 import { useToasts } from "react-bootstrap-toasts";
-import { UserAuthInfo } from "../components/types";
-import { useNavigate } from "react-router-dom";
+import type { UserAuthInfo } from "../components/types";
+import { useNavigate } from "react-router";
 
 function LoginPage() {
   const serverIp: string = "smp.example.net";

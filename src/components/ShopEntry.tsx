@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { ShopDetails } from "../components/types";
-import { Link } from "react-router-dom";
+import type { ShopDetails } from "../components/types";
+import { Link } from "react-router";
 import ItemToolTip from "./ItemToolTip";
 import "./ShopEntry.css";
 import { getItemImage, getPrettyItemName } from "../utils";

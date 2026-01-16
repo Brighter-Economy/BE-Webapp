@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { ShopDetails } from "../components/types";
+import type { ShopDetails } from "../components/types";
 import ItemToolTip from "../components/ItemToolTip";
 import { getItemImage } from "../utils";
 import glintImage from "../assets/glint.png";
 import "./PlayerDetails.css";
 import { get } from "../request";
 
-function PlayerDetails() {
-  const pathname = window.location.pathname.replace(/\/players\//, "");
-  const fallbackSrc = "src/assets/no_item_image.png";
+interface PlayerDetailsProps {
+  uuid: string;
+}
 
+const PlayerDetails: React.FC<PlayerDetailsProps> = ({ uuid }) => {
   const [shopData, setShopData] = useState<ShopDetails[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -19,33 +20,25 @@ function PlayerDetails() {
   } | null>(null);
   const [selectedShop, setSelectedShop] = useState<ShopDetails | null>(null);
 
-  const getItem = async (pathname: string) => {
-    try {
-      const shopsJson = await get("/api/shops", (response) => response.json());
-      const filteredShops = shopsJson.filter(
-        (shop: ShopDetails) => shop.ownerUuid === pathname
-      );
-      return filteredShops;
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (err: any) {
-      setError(err.message);
-      return null;
-    }
-  };
+  // TODO: get from /api/account/{uuid}/shops
+  const requestShops = async () =>
+    (await get("/api/shops", (response) => response.json())).then(
+      (shops: ShopDetails[]) =>
+        shops.filter((shop: ShopDetails) => shop.ownerUuid === uuid)
+    );
 
   const getAccountInfo = async (uuid: string) =>
     await get(`/api/accounts/${uuid}`, (response) => response.json());
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getItem(pathname);
+      const data = await requestShops();
       setShopData(data);
       setLoading(false);
     };
 
     fetchData();
-  }, [pathname]);
+  }, []);
 
   useEffect(() => {
     const fetchAccountInfo = async () => {
@@ -195,6 +188,6 @@ function PlayerDetails() {
       </div>
     </div>
   );
-}
+};
 
 export default PlayerDetails;

@@ -1,7 +1,7 @@
 import {
   forwardRef,
-  MouseEventHandler,
-  ReactElement,
+  type MouseEventHandler,
+  type ReactElement,
   useImperativeHandle,
   useRef,
   useState,

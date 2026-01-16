@@ -1,5 +1,5 @@
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import { useState } from "react";
 import shopBlockIconUrl from "../assets/ShopBlockIcon.png";
 
@@ -8,7 +8,7 @@ interface NavLinkParams {
   content: any;
 }
 
-const NavLink: React.FC<NavLinkParams> = ({ path, content }) => {
+const NavbarLink: React.FC<NavLinkParams> = ({ path, content }) => {
   const location = useLocation();
 
   var linkClasses = "nav-link h2";
@@ -18,9 +18,9 @@ const NavLink: React.FC<NavLinkParams> = ({ path, content }) => {
 
   return (
     <li className="nav-item">
-      <Link className={linkClasses} to={path}>
+      <NavLink className={linkClasses} to={path}>
         {content}
-      </Link>
+      </NavLink>
     </li>
   );
 };
@@ -64,15 +64,15 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navebarNav">
           <div className="ms-auto">
             <ul className="navbar-nav">
-              <NavLink path="/items" content="Items" />
-              <NavLink path="/players" content="Players" />
-              <NavLink path="/servershops" content="Shops" />
-              <NavLink path="/auctions" content="Auctions" />
-              <NavLink
+              <NavbarLink path="/items" content="Items" />
+              <NavbarLink path="/players" content="Players" />
+              <NavbarLink path="/servershops" content="Shops" />
+              <NavbarLink path="/auctions" content="Auctions" />
+              <NavbarLink
                 path="/settings"
                 content={<i className="bi bi-gear" />}
               />
-              <NavLink
+              <NavbarLink
                 path="https://github.com/Brighter-Economy"
                 content={<i className="bi bi-github" />}
               />

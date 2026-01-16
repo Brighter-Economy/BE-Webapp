@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ShopDetails } from "../components/types";
+import type { ShopDetails } from "../components/types";
 import ShopEntry from "../components/ShopEntry";
 import { get } from "../request";
 

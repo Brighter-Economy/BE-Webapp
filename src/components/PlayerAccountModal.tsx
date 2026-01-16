@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { useNavigate } from "react-router-dom";
-import { PlayerAccount, Transaction } from "./types";
+import { useNavigate } from "react-router";
+import type { PlayerAccount, Transaction } from "./types";
 import BasicTable from "./BasicTable";
-import CopyButton, { BaseComponent } from "./CopyButton";
+import CopyButton, { type BaseComponent } from "./CopyButton";
 import { get } from "../request";
 
 interface DataRowParameters {

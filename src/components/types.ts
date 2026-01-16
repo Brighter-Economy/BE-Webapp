@@ -50,8 +50,10 @@ export interface ShopDetails {
   price: number;
 }
 
+export type AuthType = "PLAYER" | "ADMIN";
+
 export interface UserAuthInfo {
   username: string;
-  type: "NONE" | "PLAYER" | "ADMIN";
+  type: AuthType;
   uuid: string;
 }

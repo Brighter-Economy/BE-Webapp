@@ -1,7 +1,7 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { getPrettyEnchantName, getPrettyItemName } from "../utils";
 import "./ItemToolTip.css";
-import { ItemStack } from "./types";
+import type { ItemStack } from "./types";
 
 interface ItemToolTipProperties {
   itemStack: ItemStack;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import BasicTable from "./BasicTable";
 import PlayerAccountModal from "./PlayerAccountModal";
-import { PlayerAccount } from "./types";
+import type { PlayerAccount } from "./types";
 import { get } from "../request";
 
 interface DataRowParameters {
